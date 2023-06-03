@@ -1,0 +1,420 @@
+Name,Major_Category
+GENERAL AGRICULTURE,Agriculture
+AGRICULTURE PRODUCTION AND MANAGEMENT,Agriculture
+AGRICULTURAL ECONOMICS,Agriculture
+ANIMAL SCIENCES,Agriculture
+FOOD SCIENCE,Agriculture
+PLANT SCIENCE AND AGRONOMY,Agriculture
+SOIL SCIENCE,Agriculture
+MISCELLANEOUS AGRICULTURE,Agriculture
+FORESTRY,Agriculture
+NATURAL RESOURCES MANAGEMENT,Agriculture
+FINE ARTS,Arts
+DRAMA AND THEATER ARTS,Arts
+MUSIC,Arts
+VISUAL AND PERFORMING ARTS,Arts
+COMMERCIAL ART AND GRAPHIC DESIGN,Arts
+FILM VIDEO AND PHOTOGRAPHIC ARTS,Arts
+STUDIO ARTS,Arts
+MISCELLANEOUS FINE ARTS,Arts
+ENVIRONMENTAL SCIENCE,Biology & Life Science
+BIOLOGY,Biology & Life Science
+BIOCHEMICAL SCIENCES,Biology & Life Science
+BOTANY,Biology & Life Science
+MOLECULAR BIOLOGY,Biology & Life Science
+ECOLOGY,Biology & Life Science
+GENETICS,Biology & Life Science
+MICROBIOLOGY,Biology & Life Science
+PHARMACOLOGY,Biology & Life Science
+PHYSIOLOGY,Biology & Life Science
+ZOOLOGY,Biology & Life Science
+NEUROSCIENCE,Biology & Life Science
+MISCELLANEOUS BIOLOGY,Biology & Life Science
+COGNITIVE SCIENCE AND BIOPSYCHOLOGY,Biology & Life Science
+GENERAL BUSINESS,Business
+ACCOUNTING,Business
+ACTUARIAL SCIENCE,Business
+BUSINESS MANAGEMENT AND ADMINISTRATION,Business
+OPERATIONS LOGISTICS AND E-COMMERCE,Business
+BUSINESS ECONOMICS,Business
+MARKETING AND MARKETING RESEARCH,Business
+FINANCE,Business
+HUMAN RESOURCES AND PERSONNEL MANAGEMENT,Business
+INTERNATIONAL BUSINESS,Business
+HOSPITALITY MANAGEMENT,Business
+MANAGEMENT INFORMATION SYSTEMS AND STATISTICS,Business
+MISCELLANEOUS BUSINESS & MEDICAL ADMINISTRATION,Business
+COMMUNICATIONS,Communications
+JOURNALISM,Communications
+MASS MEDIA,Communications
+ADVERTISING AND PUBLIC RELATIONS,Communications
+COMMUNICATION TECHNOLOGIES,Computer Science and Mathematics
+COMPUTER AND INFORMATION SYSTEMS,Computer Science and Mathematics
+COMPUTER PROGRAMMING AND DATA PROCESSING,Computer Science and Mathematics
+COMPUTER SCIENCE,Computer Science and Mathematics
+INFORMATION SCIENCES,Computer Science and Mathematics
+COMPUTER ADMINISTRATION MANAGEMENT AND SECURITY,Computer Science and Mathematics
+COMPUTER NETWORKING AND TELECOMMUNICATIONS,Computer Science and Mathematics
+MATHEMATICS,Computer Science and Mathematics
+APPLIED MATHEMATICS,Computer Science and Mathematics
+STATISTICS AND DECISION SCIENCE,Computer Science and Mathematics
+MATHEMATICS AND COMPUTER SCIENCE,Computer Science and Mathematics
+GENERAL EDUCATION,Education
+EDUCATIONAL ADMINISTRATION AND SUPERVISION,Education
+SCHOOL STUDENT COUNSELING,Education
+ELEMENTARY EDUCATION,Education
+MATHEMATICS TEACHER EDUCATION,Education
+PHYSICAL AND HEALTH EDUCATION TEACHING,Education
+EARLY CHILDHOOD EDUCATION,Education
+SCIENCE AND COMPUTER TEACHER EDUCATION,Education
+SECONDARY TEACHER EDUCATION,Education
+SPECIAL NEEDS EDUCATION,Education
+SOCIAL SCIENCE OR HISTORY TEACHER EDUCATION,Education
+TEACHER EDUCATION: MULTIPLE LEVELS,Education
+LANGUAGE AND DRAMA EDUCATION,Education
+ART AND MUSIC EDUCATION,Education
+MISCELLANEOUS EDUCATION,Education
+LIBRARY SCIENCE,Education
+ARCHITECTURE,Engineering
+GENERAL ENGINEERING,Engineering
+AEROSPACE ENGINEERING,Engineering
+BIOLOGICAL ENGINEERING,Engineering
+ARCHITECTURAL ENGINEERING,Engineering
+BIOMEDICAL ENGINEERING,Engineering
+CHEMICAL ENGINEERING,Engineering
+CIVIL ENGINEERING,Engineering
+COMPUTER ENGINEERING,Engineering
+ELECTRICAL ENGINEERING,Engineering
+ENGINEERING MECHANICS PHYSICS AND SCIENCE,Engineering
+ENVIRONMENTAL ENGINEERING,Engineering
+GEOLOGICAL AND GEOPHYSICAL ENGINEERING,Engineering
+INDUSTRIAL AND MANUFACTURING ENGINEERING,Engineering
+MATERIALS ENGINEERING AND MATERIALS SCIENCE,Engineering
+MECHANICAL ENGINEERING,Engineering
+METALLURGICAL ENGINEERING,Engineering
+MINING AND MINERAL ENGINEERING,Engineering
+NAVAL ARCHITECTURE AND MARINE ENGINEERING,Engineering
+NUCLEAR ENGINEERING,Engineering
+PETROLEUM ENGINEERING,Engineering
+MISCELLANEOUS ENGINEERING,Engineering
+ENGINEERING TECHNOLOGIES,Engineering
+ENGINEERING AND INDUSTRIAL MANAGEMENT,Engineering
+ELECTRICAL ENGINEERING TECHNOLOGY,Engineering
+INDUSTRIAL PRODUCTION TECHNOLOGIES,Engineering
+MECHANICAL ENGINEERING RELATED TECHNOLOGIES,Engineering
+MISCELLANEOUS ENGINEERING TECHNOLOGIES,Engineering
+MATERIALS SCIENCE,Engineering
+NUTRITION SCIENCES,Health Sciences & Services
+GENERAL MEDICAL AND HEALTH SERVICES,Health Sciences & Services
+COMMUNICATION DISORDERS SCIENCES AND SERVICES,Health Sciences & Services
+HEALTH AND MEDICAL ADMINISTRATIVE SERVICES,Health Sciences & Services
+MEDICAL ASSISTING SERVICES,Health Sciences & Services
+MEDICAL TECHNOLOGIES TECHNICIANS,Health Sciences & Services
+HEALTH AND MEDICAL PREPARATORY PROGRAMS,Health Sciences & Services
+NURSING,Health Sciences & Services
+PHARMACY PHARMACEUTICAL SCIENCES AND ADMINISTRATION,Health Sciences & Services
+TREATMENT THERAPY PROFESSIONS,Health Sciences & Services
+COMMUNITY AND PUBLIC HEALTH,Health Sciences & Services
+MISCELLANEOUS HEALTH MEDICAL PROFESSIONS,Health Sciences & Services
+AREA ETHNIC AND CIVILIZATION STUDIES,Humanities & Liberal Arts
+LINGUISTICS AND COMPARATIVE LANGUAGE AND LITERATURE,Humanities & Liberal Arts
+FRENCH GERMAN LATIN AND OTHER COMMON FOREIGN LANGUAGE STUDIES,Humanities & Liberal Arts
+OTHER FOREIGN LANGUAGES,Humanities & Liberal Arts
+ENGLISH LANGUAGE AND LITERATURE,Humanities & Liberal Arts
+COMPOSITION AND RHETORIC,Humanities & Liberal Arts
+LIBERAL ARTS,Humanities & Liberal Arts
+HUMANITIES,Humanities & Liberal Arts
+INTERCULTURAL AND INTERNATIONAL STUDIES,Humanities & Liberal Arts
+PHILOSOPHY AND RELIGIOUS STUDIES,Humanities & Liberal Arts
+THEOLOGY AND RELIGIOUS VOCATIONS,Humanities & Liberal Arts
+ANTHROPOLOGY AND ARCHEOLOGY,Humanities & Liberal Arts
+ART HISTORY AND CRITICISM,Humanities & Liberal Arts
+HISTORY,Humanities & Liberal Arts
+UNITED STATES HISTORY,Humanities & Liberal Arts
+COSMETOLOGY SERVICES AND CULINARY ARTS,Industrial Arts & Consumer Services
+FAMILY AND CONSUMER SCIENCES,Industrial Arts & Consumer Services
+MILITARY TECHNOLOGIES,Industrial Arts & Consumer Services
+PHYSICAL FITNESS PARKS RECREATION AND LEISURE,Industrial Arts & Consumer Services
+CONSTRUCTION SERVICES,Industrial Arts & Consumer Services
+"ELECTRICAL, MECHANICAL, AND PRECISION TECHNOLOGIES AND PRODUCTION",Industrial Arts & Consumer Services
+TRANSPORTATION SCIENCES AND TECHNOLOGIES,Industrial Arts & Consumer Services
+MULTI/INTERDISCIPLINARY STUDIES,Interdisciplinary
+COURT REPORTING,Law & Public Policy
+PRE-LAW AND LEGAL STUDIES,Law & Public Policy
+CRIMINAL JUSTICE AND FIRE PROTECTION,Law & Public Policy
+PUBLIC ADMINISTRATION,Law & Public Policy
+PUBLIC POLICY,Law & Public Policy
+PHYSICAL SCIENCES,Physical Sciences
+ASTRONOMY AND ASTROPHYSICS,Physical Sciences
+ATMOSPHERIC SCIENCES AND METEOROLOGY,Physical Sciences
+CHEMISTRY,Physical Sciences
+GEOLOGY AND EARTH SCIENCE,Physical Sciences
+GEOSCIENCES,Physical Sciences
+OCEANOGRAPHY,Physical Sciences
+PHYSICS,Physical Sciences
+MULTI-DISCIPLINARY OR GENERAL SCIENCE,Physical Sciences
+"NUCLEAR, INDUSTRIAL RADIOLOGY, AND BIOLOGICAL TECHNOLOGIES",Physical Sciences
+PSYCHOLOGY,Psychology & Social Work
+EDUCATIONAL PSYCHOLOGY,Psychology & Social Work
+CLINICAL PSYCHOLOGY,Psychology & Social Work
+COUNSELING PSYCHOLOGY,Psychology & Social Work
+INDUSTRIAL AND ORGANIZATIONAL PSYCHOLOGY,Psychology & Social Work
+SOCIAL PSYCHOLOGY,Psychology & Social Work
+MISCELLANEOUS PSYCHOLOGY,Psychology & Social Work
+HUMAN SERVICES AND COMMUNITY ORGANIZATION,Psychology & Social Work
+SOCIAL WORK,Psychology & Social Work
+INTERDISCIPLINARY SOCIAL SCIENCES,Social Sciences
+GENERAL SOCIAL SCIENCES,Social Sciences
+ECONOMICS,Social Sciences
+CRIMINOLOGY,Social Sciences
+GEOGRAPHY,Social Sciences
+INTERNATIONAL RELATIONS,Social Sciences
+POLITICAL SCIENCE AND GOVERNMENT,Social Sciences
+SOCIOLOGY,Social Sciences
+MISCELLANEOUS SOCIAL SCIENCES,Social Sciences
+Agricultural Business & Management,Agriculture
+Agribusiness Operations,Agriculture
+Agricultural Economics,Agriculture
+"Agriculture, General",Agriculture
+Agricultural Education,Agriculture
+Music Education,Arts
+"Art, General",Arts
+"Design & Visual Communcations, General",Arts
+Interior Design,Arts
+Theatre Arts/Drama,Arts
+Cinema/Film/Video Studies,Arts
+Fine & Studio Arts,Arts
+Music,Arts
+Graphic Design,Arts
+Photography,Arts
+Fine & Studio Arts,Arts
+Music,Arts
+"Business Administration/Mgmt, General",Business
+Accounting,Business
+Business/Managerial Economics,Business
+Finance,Business
+Travel/Tourism Services Management,Business
+International Business Management,Business
+Management Quantitative Methods,Business
+Marketing Management & Research,Business
+Fashion Merchandising,Business
+"Business Administration/Mgmt, General",Business
+Accounting Technician,Business
+Management Quantitative Methods,Business
+Agricultural Public Services,Communications
+"Communications, General",Communications
+Mass Communications,Communications
+"Journalism, Print",Communications
+"Journalism, Broadcast",Communications
+Radio & Television Communications,Communications
+Public Relations & Organizational Comm,Communications
+Advertising,Communications
+"Communications, General",Communications
+"Journalism, Print",Communications
+"Family & Consumer Sciences, General",Community Services
+Food & Nutrition,Community Services
+Child Development,Community Services
+"Parks, Recreation & Leisure Studies",Community Services
+Health & Physical Education/Fitness,Community Services
+Sport & Fitness Admin/Management,Community Services
+Exercise Sci/Physiology/Kinesiology,Community Services
+Corrections,Community Services
+Criminal Justice,Community Services
+"Human Services, General",Community Services
+Social Work,Community Services
+Public Health,Community Services
+Criminal Justice,Community Services
+"Computer & Information Sci, General",Computer Science and Mathematics
+Information Science,Computer Science and Mathematics
+"Mathematics, General",Computer Science and Mathematics
+Management Information Systems,Computer Science and Mathematics
+"Computer & Information Sci, General",Computer Science and Mathematics
+Computer Science,Computer Science and Mathematics
+"Mathematics, General",Computer Science and Mathematics
+Architecture,Engineering
+Landscape Architecture,Engineering
+"Engineering, General",Engineering
+Aerospace/Astronautical Engineering,Engineering
+Chemical Engineering,Engineering
+Civil Engineering,Engineering
+Computer Engineering,Engineering
+"Electrical, Electronics & Comm Eng",Engineering
+Mechanical Engineering,Engineering
+Industrial Engineering,Engineering
+Quality Control & Safety Technologies,Engineering
+Mechanical Eng Related Technology,Engineering
+Construction/Building Technology,Engineering
+Aviation & Airway Science,Engineering
+"Engineering, General",Engineering
+"Engineering Technology, General",Engineering
+Automotive Engineering Technology,Engineering
+Construction/Building Technology,Engineering
+Architectural Drafting/CAD Technology,Engineering
+"Teacher Education, General",Education
+Special Education,Education
+Elementary Education,Education
+Early Childhood Education,Education
+Secondary Education,Education
+English/Language Arts Educ,Education
+Mathematics Education,Education
+Physical Education & Coaching,Education
+Social Studies/Sciences Educaton,Education
+"Teacher Education, General",Education
+Elementary Education,Education
+Secondary Education,Education
+Physical Education & Coaching,Education
+Nutrition Sciences,Health Sciences & Services
+Communication Disorders Services,Health Sciences & Services
+Dental Hygiene,Health Sciences & Services
+Medical Radiologic Technology,Health Sciences & Services
+Medicine (Pre-medicine),Health Sciences & Services
+"Nursing, Registered (BS/RN)",Health Sciences & Services
+Pharmacy (Pre-pharmacy),Health Sciences & Services
+Physical Therapy (Pre-phys therapy),Health Sciences & Services
+Veterinary Medicine (Pre-veterinarian),Health Sciences & Services
+Dental Hygiene,Health Sciences & Services
+Physical Therapy Assisting,Health Sciences & Services
+Veterinarian Technology/Assisting,Health Sciences & Services
+Medical Radiologic Technology,Health Sciences & Services
+Respiratory Therapy Technology,Health Sciences & Services
+Medical Laboratory Technology,Health Sciences & Services
+"Nursing, Registered (BS/RN)",Health Sciences & Services
+"Area Studies, Other",Humanities & Liberal Arts
+"Foreign Languages/Literatures, General",Humanities & Liberal Arts
+Spanish Language & Literature,Humanities & Liberal Arts
+"English Language & Literature, General",Humanities & Liberal Arts
+Rhetoric,Humanities & Liberal Arts
+Liberal Arts & General Studies,Humanities & Liberal Arts
+Philosophy,Humanities & Liberal Arts
+Divinity/Ministry,Humanities & Liberal Arts
+Religion,Humanities & Liberal Arts
+Liberal Arts & General Studies,Humanities & Liberal Arts
+Animal Sciences,Natural Sciences
+Agronomy & Crop Science,Natural Sciences
+Environmental Science/Studies,Natural Sciences
+Science Education,Natural Sciences
+"Biology, General",Natural Sciences
+Biochemistry & Biophysics,Natural Sciences
+Microbiology & Immunology,Natural Sciences
+Zoology,Natural Sciences
+"Physiology, Pathology & Related Sci",Natural Sciences
+Ecology,Natural Sciences
+Atmospheric Sciences & Meteorology,Natural Sciences
+Chemistry,Natural Sciences
+Geological & Earth Science,Natural Sciences
+Physics,Natural Sciences
+Forestry,Natural Sciences
+"Biology, General",Natural Sciences
+"Physical Sciences, General",Natural Sciences
+Fire Protection & Safety Technology,Repair & Construction
+Construction Management,Repair & Construction
+Fire Protection & Safety Technology,Repair & Construction
+Heating/Air Cond/Refrig Install/Repair,Repair & Construction
+Autobody/Collision Repair/Technology,Repair & Construction
+Diesel Mechanics/Technology,Repair & Construction
+International & Global Studies,Social Sciences
+"Psychology, General",Social Sciences
+"Social Sciences, General",Social Sciences
+Anthropology,Social Sciences
+Criminology,Social Sciences
+Economics,Social Sciences
+Geography & Cartography,Social Sciences
+Political Science & Government,Social Sciences
+Sociology,Social Sciences
+History,Social Sciences
+"Psychology, General",Social Sciences
+"Social Sciences, General",Social Sciences
+Sociology,Social Sciences
+Agronomy and Crop Science,Science
+Animal Sciences,Science
+Astronomy,Science
+Atmospheric Sciences and Meteorology,Science
+Biochemistry and Biophysics,Science
+"Biology, General",Science
+Cell/Cellular Biology,Science
+Chemistry,Science
+Ecology,Science
+Environmental Science,Science
+Food Sciences and Technology,Science
+Forestry,Science
+Genetics,Science
+Geological and Earth Sciences,Science
+Horticulture Science,Science
+Marine/Aquatic Biology,Science
+Microbiology and Immunology,Science
+"Natural Resources Conservation, General",Science
+Natural Resources Management,Science
+"Physical Sciences, General",Science
+Physics,Science
+Science Education,Science
+Wildlife and Wildlands Management,Science
+Zoology,Science
+Actuarial Science,Computer Science and Mathematics
+Applied Mathematics,Computer Science and Mathematics
+"Business/Management Quantitative Methods, General",Computer Science and Mathematics
+"Computer and Information Sciences, General",Computer Science and Mathematics
+Computer Network/Telecommunications,Computer Science and Mathematics
+Computer Science and Programming,Computer Science and Mathematics
+Computer Software and Media Application,Computer Science and Mathematics
+Computer System Administration,Computer Science and Mathematics
+Data Management Technology,Computer Science and Mathematics
+Information Science,Computer Science and Mathematics
+Management Information Systems,Computer Science and Mathematics
+Mathematics Education,Computer Science and Mathematics
+"Mathematics, General",Computer Science and Mathematics
+Statistics,Computer Science and Mathematics
+Webpage Design,Computer Science and Mathematics
+Athletic Training,Biology & Life Science
+Chiropractic (Pre-Chiropractic),Biology & Life Science
+Dentistry (Pre-Dentistry),Biology & Life Science
+Emergency Medical Technology,Biology & Life Science
+Food and Nutrition,Biology & Life Science
+"Health/Medical Technology, General",Biology & Life Science
+Medical Laboratory Technology,Biology & Life Science
+Medical Radiologic Technology,Biology & Life Science
+Medicine (Pre-Medicine),Biology & Life Science
+Nuclear Medicine Technology,Biology & Life Science
+"Nursing, Practical/Vocational (LPN)",Biology & Life Science
+"Nursing, Registered (BS/RN)",Biology & Life Science
+Optometry (Pre-Optometry),Biology & Life Science
+Osteopathic Medicine,Biology & Life Science
+Pharmacy (Pre-Pharmacy),Biology & Life Science
+Physical Therapy (Pre-Physical Therapy),Biology & Life Science
+Physician Assisting,Biology & Life Science
+Respiratory Therapy Technology,Biology & Life Science
+Surgical Technology,Biology & Life Science
+Veterinarian Assisting/Technology,Biology & Life Science
+Veterinary Medicine (Pre-Vet),Biology & Life Science
+Aeronautical/Aerospace Engineering Technology,Engineering
+Aerospace/Aeronautical Engineering,Engineering
+Agricultural/Bioengineering,Engineering
+Architectural Drafting/CAD Technology,Engineering
+Architectural Engineering,Engineering
+Architectural Engineering Technology,Engineering
+"Architecture, General",Engineering
+Automotive Engineering Technology,Engineering
+Biomedical Engineering,Engineering
+Chemical Engineering,Engineering
+Civil Engineering,Engineering
+Civil Engineering Technology,Engineering
+Computer Engineering,Engineering
+Computer Engineering Technology,Engineering
+Construction Engineering/Management,Engineering
+Construction/Building Technology,Engineering
+"Drafting/CAD Technology, General",Engineering
+"Electrical, Electronic, and Communication Engineering",Engineering
+Electrical/Electronics Engineering Technology,Engineering
+Electromechanical/Biomedical Engineering Technology,Engineering
+"Engineering (Pre-Engineering), General",Engineering
+"Engineering Technology, General",Engineering
+Environmental Control Technologies,Engineering
+Environmental Health Engineering,Engineering
+Industrial Engineering,Engineering
+Industrial Production Technologies,Engineering
+Mechanical Drafting/CAD Technology,Engineering
+Mechanical Engineering,Engineering
+Mechanical Engineering Technology,Engineering
+Military Technologies,Engineering
+Nuclear Engineering,Engineering
+Quality Control and Safety Technologies,Engineering
+Surveying Technology,Engineering

@@ -1,0 +1,14 @@
+{   
+    "school": {
+        "columns_required": ["name", "address", "curriculum__abbreviation"]
+    },
+    "college": {
+        "columns_required": ["name", "address"]
+    },
+    "subject": {
+        "columns_required": ["name", "curriculum__abbreviation", "education_level"]
+    },
+    "major": {
+        "columns_required": ["name"]
+    }
+}
