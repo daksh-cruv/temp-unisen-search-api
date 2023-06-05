@@ -6,6 +6,7 @@ from rest_framework import views, status
 from rest_framework.response import Response
 from services.src import search_engine
 from core.models import *
+from services.subject_recommendation.recommendation_logic import RecommendationSystem
 
 
 curriculum_queryset = Curriculum.objects.all()
@@ -16,6 +17,7 @@ school_search = search_engine.SearchEngine(School.objects.select_related('curric
 college_search = search_engine.SearchEngine(College.objects.all(), "college")
 subject_search = search_engine.SearchEngine(Subject.objects.select_related('curriculum'), "subject", curriculum_list)
 major_search = search_engine.SearchEngine(Major.objects.all(), "major")
+subject_recommendation = RecommendationSystem(curriculum_list)
 
 
 class SchoolAPIView(views.APIView):
@@ -218,3 +220,29 @@ class SaveCurriculumAPIView(views.APIView):
             print(serializer.errors)
             return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
 
+
+class SubjectRecommendationAPIView(views.APIView):
+    def __init__(self):
+        self.get_serializer_class = SchoolQuerySerializer
+
+    """
+    A simple APIView for saving school data to database.
+    """
+
+    def get(self, request):
+        try:
+            data = JSONParser().parse(request)
+            serializer = self.get_serializer_class(data=data)
+            if serializer.is_valid(raise_exception=True):
+                # pass the first argument as the query and the second as filter_dictionary
+                query = serializer.validated_data.get('query')
+                print("query: ", query)
+                # all arguments after query are passed as filter_dictionary
+                curriculum = serializer.validated_data.get('curriculum')
+                recommendations = subject_recommendation.recomm_logic(curriculum.upper(), query.split(", ") if query else [])
+                serializer.save()
+                return Response(recommendations, status=status.HTTP_200_OK)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except JSONDecodeError:
+            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)

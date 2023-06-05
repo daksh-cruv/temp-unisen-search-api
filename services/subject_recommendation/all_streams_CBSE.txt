@@ -1,0 +1,91 @@
+Physics, Chemistry, Mathematics, Biology, English
+Physics, Chemistry, Mathematics, Computer Science, English
+Physics, Chemistry, Mathematics, Economics, English
+Physics, Chemistry, Biology, English, Physical Education
+Physics, Chemistry, Biology, English, Biotechnology
+Physics, Chemistry, Biology, English, Psychology
+Physics, Chemistry, Biology, English, Fine Arts
+Physics, Chemistry, Biology, English, History
+Physics, Chemistry, Biology, English, Geography
+Physics, Chemistry, Biology, English, Sociology
+Physics, Chemistry, Mathematics, Computer Science, Physical Education
+Physics, Chemistry, Mathematics, Computer Science, Informatics Practices
+Physics, Chemistry, Mathematics, Computer Science, Statistics
+Physics, Chemistry, Mathematics, Computer Science, Economics
+Physics, Chemistry, Mathematics, Computer Science, Entrepreneurship
+Physics, Chemistry, Mathematics, Computer Science, Psychology
+Physics, Chemistry, Mathematics, Computer Science, Fine Arts
+Physics, Chemistry, Mathematics, Computer Science, Music
+Physics, Chemistry, Mathematics, Computer Science, Geography
+Physics, Chemistry, Mathematics, Computer Science, Political Science
+Physics, Chemistry, Mathematics, Economics, Entrepreneurship
+Physics, Chemistry, Mathematics, Economics, Statistics
+Physics, Chemistry, Mathematics, Economics, Political Science
+Physics, Chemistry, Mathematics, Economics, Psychology
+Physics, Chemistry, Mathematics, Economics, Fine Arts
+Physics, Chemistry, Mathematics, Economics, History
+Physics, Chemistry, Mathematics, Economics, Geography
+Physics, Chemistry, Mathematics, Economics, Physical Education
+Physics, Chemistry, Mathematics, Economics, Computer Science
+Physics, Chemistry, Mathematics, Economics, Informatics Practices
+Physics, Chemistry, Mathematics, Biology, Psychology
+Business Studies, Accountancy, Economics, Mathematics, English
+Business Studies, Accountancy, Economics, Computer Science, English
+Business Studies, Accountancy, Economics, Informatics Practices, English
+Business Studies, Accountancy, Economics, Physical Education, English
+Business Studies, Accountancy, Economics, Entrepreneurship, English
+Business Studies, Accountancy, Economics, Statistics, English
+Business Studies, Accountancy, Economics, Fine Arts, English
+Business Studies, Accountancy, Economics, History, English
+Business Studies, Accountancy, Economics, Geography, English
+Business Studies, Accountancy, Economics, Political Science, English
+Business Studies, Accountancy, Economics, Mathematics, Entrepreneurship
+Business Studies, Accountancy, Economics, Mathematics, Statistics
+Business Studies, Accountancy, Economics, Mathematics, Physical Education
+Business Studies, Accountancy, Economics, Mathematics, Computer Science
+Business Studies, Accountancy, Economics, Mathematics, Informatics Practices
+Business Studies, Accountancy, Economics, Mathematics, Fine Arts
+Business Studies, Accountancy, Economics, Mathematics, Music
+Business Studies, Accountancy, Economics, Mathematics, Geography
+Business Studies, Accountancy, Economics, Mathematics, Political Science
+Business Studies, Accountancy, Economics, Entrepreneurship, Statistics
+Business Studies, Accountancy, Economics, Entrepreneurship, Physical Education
+Business Studies, Accountancy, Economics, Entrepreneurship, Computer Science
+Business Studies, Accountancy, Economics, Entrepreneurship, Informatics Practices
+Business Studies, Accountancy, Economics, Entrepreneurship, Fine Arts
+Business Studies, Accountancy, Economics, Entrepreneurship, Music
+Business Studies, Accountancy, Economics, Entrepreneurship, Geography
+Business Studies, Accountancy, Economics, Entrepreneurship, Political Science
+Business Studies, Accountancy, Economics, Statistics, Physical Education
+Business Studies, Accountancy, Economics, Statistics, Computer Science
+Business Studies, Accountancy, Economics, Statistics, Informatics Practices
+History, Political Science, Sociology, Economics, English
+History, Political Science, Sociology, Geography, English
+History, Political Science, Sociology, Psychology, English
+History, Political Science, Sociology, Fine Arts, English
+History, Political Science, Sociology, Physical Education, English
+History, Political Science, Sociology, Music, English
+History, Political Science, Sociology, Home Science, English
+History, Political Science, Sociology, Philosophy, English
+History, Political Science, Sociology, Mathematics, English
+History, Political Science, Sociology, Economics, Geography
+History, Political Science, Sociology, Economics, Psychology
+History, Political Science, Sociology, Economics, Fine Arts
+History, Political Science, Sociology, Economics, Music
+History, Political Science, Sociology, Economics, Physical Education
+History, Political Science, Sociology, Economics, Computer Science
+History, Political Science, Sociology, Economics, Informatics Practices
+History, Political Science, Sociology, Economics, Statistics
+History, Political Science, Sociology, Economics, Philosophy
+History, Political Science, Sociology, Economics, Home Science
+History, Political Science, Sociology, Geography, Psychology
+History, Political Science, Sociology, Geography, Fine Arts
+History, Political Science, Sociology, Geography, Music
+History, Political Science, Sociology, Geography, Physical Education
+History, Political Science, Sociology, Geography, Computer Science
+History, Political Science, Sociology, Geography, Informatics Practices
+History, Political Science, Sociology, Geography, Statistics
+History, Political Science, Sociology, Geography, Philosophy
+History, Political Science, Sociology, Psychology, Fine Arts
+History, Political Science, Sociology, Psychology, Music
+History, Political Science, Sociology, Psychology, Physical Education

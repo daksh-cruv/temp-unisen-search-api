@@ -6,7 +6,7 @@ from services.src import search_engine
 
 
 class SchoolQuerySerializer(serializers.ModelSerializer):
-	query = serializers.CharField(max_length=100)
+	query = serializers.CharField(max_length=100, allow_blank=True, required=False)
 	curriculum = serializers.CharField(max_length=10)
 
 	class Meta:
