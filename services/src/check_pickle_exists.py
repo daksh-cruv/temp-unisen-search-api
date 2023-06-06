@@ -159,3 +159,4 @@ class CheckPickleExists():
             filters = {"curriculum__abbreviation": option.upper()}
             filtered_df = self.filter_df(filters=filters)
             self.check_pickle_updated(df=filtered_df, pkl_path=file_name)
+

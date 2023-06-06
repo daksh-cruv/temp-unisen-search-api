@@ -1,0 +1,171 @@
+degree_title,degree_reference,degree_level
+Bachelor of Architecture ,['BArch'],bachelor
+Bachelor of Arts ,"['BA', ' AB', ' BS', ' BSc', ' SB', ' ScB']",bachelor
+Bachelor of Applied Arts ,['BAA'],bachelor
+Bachelor of Applied Arts and Science ,['BAAS'],bachelor
+Bachelor of Applied Science in Information Technology ,['BappSc(IT)'],bachelor
+Bachelor of Design ,"['BDes', '  SDes ']",bachelor
+Bachelor of Engineering ,"['BEng', ' BE', ' BSE', ' BESc', ' BSEng', ' BASc', ' BTech', ' BSc(Eng)', ' AMIE', 'GradIETE']",bachelor
+Bachelor of Science in Business ,['BSBA'],bachelor
+Bachelor of Engineering Technology ,['BSET'],bachelor
+Bachelor of Technology ,"['B.Tech.' , 'B.Tech.']",bachelor
+International Business Economics ,['BIBE'],bachelor
+Bachelor of Business Administration ,['BBA'],bachelor
+Bachelor of Management Studies ,['BMS'],bachelor
+Bachelor of Administrative Studies,,bachelor
+Bachelor of International Business Economics ,['BIBE'],bachelor
+Bachelor of Commerce ,"['BCom', '  BComm']",bachelor
+Bachelor of Fine Arts ,['BFA'],bachelor
+Bachelor of Business ,"['BBus',  'BBus']",bachelor
+Bachelor of Management and Organizational Studies ,['BMOS'],bachelor
+Bachelor of Business Science ,['BBusSc'],bachelor
+Bachelor of Accountancy ,"['B.Acy.',  'B.Acc.',  'B. Accty']",bachelor
+Bachelor of Comptrolling ,['B.Acc.Sci.  B.Compt.'],bachelor
+Bachelor of Economics ,"['BEc', ' BEconSc', ' BA(Econ)', 'Bsc(Econ)']",bachelor
+Bachelor of Arts in Organizational Management ,['BAOM'],bachelor
+Bachelor of Computer Science ,['BCompSc'],bachelor
+Bachelor of Computing ,['BComp'],bachelor
+Bachelor of Science in Information Technology ,['BSc IT'],bachelor
+Bachelor of Computer Applications ,['BCA'],bachelor
+Bachelor of Business Information Systems ,['BBIS'],bachelor
+Intercalated Bachelor of Science ,['BSc'],bachelor
+Bachelor of Medical Science ,['BMedSci'],bachelor
+Bachelor of Medical Biology ,['BMedBiol'],bachelor
+Bachelor of Science in Public Health ,['BSPH'],bachelor
+Bachelor of Science in Nursing ,"['BN', ' BNSc', ' BScN', ' BSN', ' BNurs', ' BSN', ' BHSc.']",bachelor
+Bachelor of Health Science ,"['BHS',  'BHSc']",bachelor
+Bachelor of Kinesiology ,"['BKin', ' Bsc(Kin)', ' BHK)']",bachelor
+Bachelor of Arts for Teaching ,['BAT'],bachelor
+Bachelor of Aviation ,['BAvn'],bachelor
+Bachelor of Divinity ,"['BD',  'BDiv']",bachelor
+Bachelor of Theology ,"['B.Th.', 'Th.B.',  'BTheol']",bachelor
+Bachelor of Religious Education ,['BRE'],bachelor
+Bachelor of Religious Studies ,['BRS'],bachelor
+Bachelor of Film and Television ,['BF&TV'],bachelor
+Bachelor of Integrated studies ,['BIS'],bachelor
+Bachelor of Journalism ,"['BJ', ' BAJ', ' BSJ  BJourn']",bachelor
+Bachelor of Landscape Architecture ,['BLArch'],bachelor
+Bachelor of Liberal Arts ,"['B.L.A.,  A.L.B.']",bachelor
+Bachelor of General Studies ,"['BGS', ' BSGS']",bachelor
+Bachelor of Science in Human Biology ,['BSc'],bachelor
+Bachelor of Applied Studies ,['BAS'],bachelor
+Bachelor of Liberal Studies,,bachelor
+Bachelor of Professional Studies ,['BPS'],bachelor
+Bachelor of Library Science ,"['B.L.S.', ' B.Lib.']",bachelor
+Bachelor of Library and Information Science ,['B.L.I.S.'],bachelor
+Bachelor of Music ,"['BM',  'BMus']",bachelor
+Bachelor of Art in Music ,['BA in Music'],bachelor
+Bachelor of Music Education ,['BME'],bachelor
+Bachelor of Philosophy ,"['BPhil', ' PhB']",bachelor
+Bachelor of Arts in Psychology ,['BAPSY'],bachelor
+Bachelor of Mortuary Science ,['BMS'],bachelor
+Bachelor of Science in Psychology ,['BSc(Psych) '],bachelor
+Bachelor of Science in Education ,"['BSE', ' BS in Ed']",bachelor
+Bachelor of Science and/with education degree ,['BscEd'],bachelor
+Bachelor of Science in Forestry ,"['B.S.F.',  'B.Sc.F.']",bachelor
+Bachelor of Applied Science ,['BASc'],bachelor
+Bachelor of Science in Law ,['BSL'],bachelor
+Bachelor of Social Science ,['BSocSc'],bachelor
+Bachelor of Arts in Social Work ,"['BSW',  'BASW']",bachelor
+Bachelor of Talmudic Law ,['BTL'],bachelor
+Bachelor of Technology ,['B.Tech'],bachelor
+Bachelor of Tourism Studies ,['BTS'],bachelor
+Bachelor of Mathematics ,['BMath'],bachelor
+Bachelor of Mathematical Sciences ,['BMathSc'],bachelor
+Bachelor of Public Affairs and Policy Management ,['BPAPM'],bachelor
+Bachelor of Urban and Regional Planning ,"['BURP', 'BPlan']",bachelor
+Master of Accountancy ,"['MAcc', ' MAc', '  MAcy']",master
+Master of Advanced Study ,['MAS'],master
+Master of Economics ,['MEcon'],master
+Master of Architecture ,['MArch'],master
+Master of Applied Science ,"['MASc', ' MAppSc', ' MApplSc', ' MASc','MAS']",master
+Master of Arts ,"['MA', ' MA', ' AM', '  AM']",master
+Master of Arts in Teaching ,['MAT'],master
+Master of Arts in Liberal Studies ,"['MA', ' ALM', ' MLA', ' MLS  MALS']",master
+Master of Business ,['MBus'],master
+Master of Business Administration ,['MBA'],master
+Master of Business Informatics ,['MBI'],master
+Master of City Planning,,master
+Master of Chemistry ,['MChem'],master
+Master of Commerce ,"['MCom',  'Mcomm']",master
+Master of Computational Finance ,['Quantitative Finance'],master
+Master of Computer Applications ,['MCA'],master
+Master in Creative Technologies,,master
+Master of Criminal Justice ,['MCJ'],master
+Master of Design ,"['MDes', ' MDes', 'Mdesign']",master
+Master of Divinity ,['MDiv'],master
+Master of Economics ,['MEcon'],master
+Master of Education ,"['MEd', ' MEd', ' EdM', ' MAEd', ' MSEd', ' MSE', 'MEdL']",master
+Master of Enterprise ,['MEnt'],master
+Master of Engineering ,"['MEng', 'ME'  ,'MEng']",master
+Master of Engineering Management ,['MEM'],master
+Master of European Law ,['LLM Eur'],master
+Master of Finance ,['MFin'],master
+Master of Financial Mathematics ,['Master of Quantitative Finance'],master
+Master of Financial Engineering ,['Master of Quantitative Finance'],master
+Master of Financial Economics,,master
+Master of Fine Arts ,"['MFA', 'MFA']",master
+Master of Health Administration ,['MHA'],master
+Master of Health Science ,['MHS'],master
+Master of Humanities ,['MH'],master
+Master of Industrial and Labor Relations ,['MILR'],master
+Master of International Affairs,,master
+Master of International Business,,master
+Master of International Studies ,['MIS'],master
+Masters in International Economics,,master
+Master of Information System Management ,"['MISM', ' MSIM', ' MIS']",master
+Master of IT ,"[' MSIT', ' MScIT', ' MScIT', ' MscIT',  'MSc IT']",master
+Master of Jurisprudence ,"['MJ',  'Mjur']",master
+Master of Laws ,['LLM'],master
+Master of Studies in Law ,['MSL'],master
+Master of Landscape Architecture ,['MArch'],master
+Master of Letters ,['MLitt'],master
+Master of Liberal Arts ,"['MA', 'ALM', 'MLA', 'MLS',  'MALS']",master
+Master of Library and Information Science ,['MLIS'],master
+Master of Management ,['MM'],master
+Master of Mathematics ,['MMath'],master
+Master of Mathematical Finance,,master
+Master of Medical Science,,master
+Master of Music ,"['MM','MMus']",master
+Master of Occupational Therapy ,['OT'],master
+Master of Pharmacy ,"['MPharm',  'Mpharm']",master
+Master of Philosophy ,['MPhil'],master
+Master of Physics ,['MPhys'],master
+Master of Physician Assistant Studies,,master
+Master of Political Science,,master
+Master of Professional Studies ,['MPS'],master
+Master of Public Administration ,['MPA'],master
+Master of Public Affairs ,['MPAff'],master
+Master of Public Health ,['MPH'],master
+Master of Public Management,,master
+Master of Public Policy ,['MPP'],master
+Master of Quantitative Finance,,master
+Master of Rabbinic Studies ,['MRb'],master
+Master of Real Estate Development,,master
+Master of Religious Education,,master
+Master of Research - MSc,['R'],master
+Master of Sacred Theology ,['STM'],master
+Master of Sacred Music ,['MSM'],master
+Master of Science ,"['MSc', ' MSc', ' MSci', ' MSi', ' ScM', ' MS', ' MSHS', ' MS', ' Mag', ' Mg', ' Mgr', ' SM', '  SM']",master
+Master of Science in Education,,master
+Master of Science in Engineering ,['MSE'],master
+Master of Science in Finance ,['MFin'],master
+Master of Science in Human Resource Development ,"['HRD' , 'MSHRD']",master
+Master of Science in Information Systems Management ,['MSMIS'],master
+Master of Science in Information Systems ,['MSIS'],master
+Master of Science in Information Technology ,"['MSIT', ' MScIT', ' MScIT', ' MScIT'  ,'Msc IT']",master
+Master of Science in Nursing ,['MSN'],master
+Master of Science in Project Management ,['MSPM'],master
+Master of Science in Management ,"['MSc' , 'MSM']",master
+Master of Science in Leadership ,['MSL'],master
+Master of Science in Supply Chain Management ,"['SCM',  'MSSCM']",master
+Master of Science in Taxation,,master
+Master of Science in Teaching ,['MST'],master
+Master of Social Work ,['MSW'],master
+Master of Social Science ,['MSSc'],master
+Master of Surgery ,"['ChM',  'MS', 'MCh', 'MChir']",master
+Master of Studies ,['MST'],master
+Master of Theology ,"['ThM',  'Mth']",master
+Master of Theological Studies ,['MTS'],master
+Master of Urban Planning,,master
+Master of Veterinary Science ,"['MVSC',  'MVSc']",master

@@ -6,3 +6,9 @@ class ProfileConstants:
         ('pg', 'Postgraduate'),
         ('phd', 'PhD'),
     )
+
+    college_education_choices = (
+        ('bachelor', 'Bachelors'),
+        ('master', 'Masters'),
+        ('phd', 'PhD')
+    )

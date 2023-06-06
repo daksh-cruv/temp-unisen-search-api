@@ -6,10 +6,9 @@ from collections import Counter
 from queue import PriorityQueue
 
 class RecommendationSystem:
-    def __init__(self, list_of_boards):
+    def __init__(self, list_of_boards, subjects_queryset):
         self.list_of_boards = list_of_boards
-
-        self.df = pd.read_csv(r'services\subject_recommendation\Unisen School Datas - Curriculum CBSE.csv', header=0).dropna()
+        self.df = pd.DataFrame(list(subjects_queryset.values_list("name", flat=True)), columns=["Class 12"])
         self.subjects_list = self.df['Class 12'].tolist()
         self.model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
         self.subjects_vectors = self.encode_subjects()
@@ -22,10 +21,9 @@ class RecommendationSystem:
             self.all_boards_streams_files[board] = self.current_board_streams_file
             self.initial_recommendations = self.get_initial_recommendations()
             self.init_recomm_for_each_board[board] = self.initial_recommendations
-            print("Board: ", board, "Initial Recommendations: ", self.initial_recommendations)
         
         print(self.all_boards_streams_files)
-        print("\nInitiated Recommendation System\n")
+        print("\nInitiated Subject Recommendation System\n")
         # self.board = board
         # self.all_streams_file = self.choose_streams_file()
         # self.initial_recommendations = self.get_initial_recommendations()
@@ -41,8 +39,6 @@ class RecommendationSystem:
         Returns: Subject recommendations"""
 
         self.current_board_streams_file = self.all_boards_streams_files[board]
-        print("Board: ", board)
-        print("Input Subjects: ", input_subjects)
 
         if len(input_subjects) == 0:
             return self.init_recomm_for_each_board[board]
@@ -176,7 +172,7 @@ class RecommendationSystem:
         return recommended_subjects
 
     def generate_board_file_name(self, curriculum):
-        file_path = r"services\subject_recommendation\\"
+        file_path = r"services\subject_recommendation\train\\"
         file_name = "all_streams_" + curriculum + ".txt"
         return file_path + file_name
 

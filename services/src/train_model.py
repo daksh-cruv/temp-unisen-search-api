@@ -66,3 +66,4 @@ class TrainModel:
             pickle.dump(embeddings, f)
 
         print("Embeddings saved to: ", dest_path, "\n")
+        

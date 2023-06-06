@@ -46,12 +46,13 @@ class FuzzySchoolMatcher:
 
         # Perform fuzzy matching on the top k addresses
         top_5_matches = process.extractBests(query, top_k_strings, scorer=fuzz.token_set_ratio, limit=5)
-
+        print(df.head())
         final_list = []
-
+        print(top_5_matches)
         # Extract the school name, address, and score for the top 5 matches and append
         # them to the final list.
         for match in top_5_matches:
+            print(match)
             name = df.loc[df["concat"] == match[0], "name"].values[0]
             score = match[1]
             try:

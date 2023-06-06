@@ -28,4 +28,4 @@ The search engine is implemented as a feature for Unisen that searches and selec
 - The destination path for the dumped pkl files must be in the `output` folder within `data` folder. Naming convention is `"<board name>_embeddings.pkl"`. For example: `icse_embeddings.pkl`.
 - Each newly included csv dataset must be encoded using sentence transformers for the functioning of fuzzy search. Encode the dataset using `train()` method in `train_model.py`.
 - The paths of .csv as well as .pkl file must be entered in `board_file_paths.json` present in `input` folder. The program uses this json files to load the respective dataset and embeddings. Make sure to take care of escape sequences using `\\`.
-- In the `.json` file, make separate entries for each board as done before. Mention the board name and the respective file paths inside it. 
+- In the `.json` file, make separate entries for each board as done before. Mention the board name and the respective file paths inside it.

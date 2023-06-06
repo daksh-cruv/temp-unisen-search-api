@@ -36,3 +36,7 @@ class MajorDataAdmin(admin.ModelAdmin):
 class MajorCategoryDataAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
 
+
+@admin.register(core_models.Degree)
+class DegreeDataAdmin(admin.ModelAdmin):
+    list_display = ('name', 'education_level','id')

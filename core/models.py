@@ -133,3 +133,18 @@ class Major(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class Degree(models.Model):
+
+    """
+    This model is used to store the different college degrees in the database.
+    Attributes:
+        name (str): The full name of the degree.
+        education_level (str): The education level of the degree, such as bachelor or master.
+    """
+    name = models.CharField(max_length=100)
+    education_level = models.CharField(max_length=10, choices=ProfileConstants.college_education_choices)
+
+    def __str__(self):
+        return self.name

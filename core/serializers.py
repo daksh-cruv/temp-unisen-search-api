@@ -128,3 +128,12 @@ class MajorCategorySerializer(serializers.ModelSerializer):
 		fields = (
 			'name',
 		)
+
+
+class DegreeDataSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = models.Degree
+		fields = (
+			'name',
+			'education_level'
+		)

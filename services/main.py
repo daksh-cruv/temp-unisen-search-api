@@ -12,4 +12,4 @@ if __name__ == "__main__":
     print("Results:")
     for result in results:
         print(result[0], result[1], result[2], sep="\n")
-        print()
+        print() 

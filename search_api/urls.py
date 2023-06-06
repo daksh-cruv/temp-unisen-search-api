@@ -17,4 +17,6 @@ urlpatterns += [
     path('profile/save/curriculum', core_views.SaveCurriculumAPIView.as_view()),
     path('profile/save/majorcategory', core_views.SaveMajorCategoryAPIView.as_view()),
     path('profile/school/subject/recommend', core_views.SubjectRecommendationAPIView.as_view()),
+    path('profile/college/major/recommend', core_views.DegreeAPIView.as_view()),
+    path('profile/save/degree', core_views.DegreeAPIView.as_view()),
 ]
