@@ -37,7 +37,9 @@ class FuzzySchoolMatcher:
         
         # Get the indices of the top k most similar embeddings
         sorted_similarities = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
-
+        # 30 % weight to fuzzy and 70% weight to context
+        # weighted sum (multiply karo) 0.3 * fuzzy + 0.7 * context (scale context to 100) 
+        # use alias names = for subject search using actual name + alias names
         k = 25
         # Get the indices top k most similar embeddings
         top_k_entries = sorted_similarities[:k]
@@ -46,14 +48,17 @@ class FuzzySchoolMatcher:
 
         # Perform fuzzy matching on the top k addresses
         top_5_matches = process.extractBests(query, top_k_strings, scorer=fuzz.token_set_ratio, limit=5)
-        print(df.head())
+
         final_list = []
-        print(top_5_matches)
+        
         # Extract the school name, address, and score for the top 5 matches and append
         # them to the final list.
         for match in top_5_matches:
-            print(match)
-            name = df.loc[df["concat"] == match[0], "name"].values[0]
+            try:
+                name = df.loc[df["concat"] == match[0], "name"].values[0]
+            except IndexError:
+                # Index error occurs when the dataframe does not have a matching name
+                continue
             score = match[1]
             try:
                 address = df.loc[df["concat"] == match[0], "address"].values[0]

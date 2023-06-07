@@ -17,6 +17,16 @@ class TrainModel:
         self.model = SentenceTransformer(self.model_name)
 
         self.loader = DataLoader()
+
+
+    def save_embeddings(self, embeddings, file_name: str):
+        output_path = r"services\data\cache\\"
+        dest_path = output_path + file_name
+
+        with open(dest_path, "wb") as f:
+            pickle.dump(embeddings, f)
+
+        print("Embeddings saved to: ", dest_path, "\n")
     
 
     def train(self, df: pd.DataFrame, file_name: str):
@@ -56,14 +66,3 @@ class TrainModel:
             del dataset_embeddings[value]
 
         self.save_embeddings(dataset_embeddings, file_name)
-
-    
-    def save_embeddings(self, embeddings, file_name: str):
-        output_path = r"services\data\cache\\"
-        dest_path = output_path + file_name
-
-        with open(dest_path, "wb") as f:
-            pickle.dump(embeddings, f)
-
-        print("Embeddings saved to: ", dest_path, "\n")
-        

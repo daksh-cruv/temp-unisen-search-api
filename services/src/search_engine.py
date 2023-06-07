@@ -186,6 +186,7 @@ class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
 
         filtered_df = self.df
         for key, value in filters.items():
+            print("key: ", key, "value: ", value)
             filtered_df = filtered_df[filtered_df[key] == value]
 
         return filtered_df

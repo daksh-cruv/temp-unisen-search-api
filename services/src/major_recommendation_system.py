@@ -5,7 +5,17 @@ from .data_loader import DataLoader
 from .train_model import TrainModel
 
 
-class MajorRecommendationLogic:
+class MajorRecommendationSystem:
+
+    """
+    This class is used to generate the mapping between degrees and majors.
+    The degrees and majors are encoded using sentence transformer and then cosine similarity is used
+    to find the most similar majors for each degree.
+    The mapping is created in the form of a dictionary, where the key is the degree name and the value
+    is a list of the top 3 most similar majors.
+    The dict is further saved as a pkl file.
+    """
+
     def __init__(self, degrees_queryset, majors_queryset):
         self.train_model = TrainModel()
         self.loader = DataLoader()
@@ -15,6 +25,11 @@ class MajorRecommendationLogic:
         print("\nInitiated Major Recommendation System\n")
 
     def generate_mapping_if_not_exists(self):
+
+        """
+        This function checks if the mapping exists. If it does not exist, then it generates the mapping.
+        """
+
         try:
             self.mapping = self.load_mapping()
         except FileNotFoundError:
@@ -36,7 +51,10 @@ class MajorRecommendationLogic:
     def generate_mapping(self):
         self.preprocess_data()
         self.encode_embeddings()
-        similarity_df = pd.DataFrame(self.similarity_matrix, columns=self.majors_df['major_name'], index=self.degrees_df['degree_name'])
+        similarity_df = pd.DataFrame(self.similarity_matrix,
+                                     columns=self.majors_df['major_name'],
+                                     index=self.degrees_df['degree_name']
+                                     )
         similarity_df = similarity_df.apply(lambda x: x.sort_values(ascending=False).index.tolist(), axis=1)
         top_3_majors = similarity_df.apply(lambda x: x[:3])
         top_3_majors_dict = top_3_majors.to_dict()
@@ -48,7 +66,13 @@ class MajorRecommendationLogic:
         return self.loader.load_pkl(input_file)
     
     def get_recommendations(self, degree_name):
+        
+        """
+        This function returns the top 3 most similar majors for a given degree.
+        """
         try:
             return self.mapping[degree_name]
         except KeyError:
             return "No recommendations found"
+    
+    # updated data checker pkl file

@@ -40,7 +40,7 @@ class AbbrSchoolMatcher:
 
             """
             If the new_search_string is still bigger than length 1,
-            it means there are more than 1 words that are not in common_words_set or bigger than 4 chars.
+            it means there are more than 1 word that are not in common_words_set or smaller than 4 chars.
             So we assume that the first word is the institute name and assign it to new_search_string
             and the rest is the place.
             """
@@ -60,7 +60,7 @@ class AbbrSchoolMatcher:
             query = "".join(list_of_letters) + " " + " ".join(full_words)
         else:
             
-            # If the lenght of query is 1, it means that there is only one word in the query.
+            # If the length of query is 1, it means that there is only one word in the query.
             # most likely it is the institute name.
             place = ""
             query = query[0]

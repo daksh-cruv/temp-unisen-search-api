@@ -6,8 +6,8 @@ from rest_framework import views, status
 from rest_framework.response import Response
 from services.src import search_engine
 from core.models import *
-from services.subject_recommendation.recommendation_logic import RecommendationSystem
-from services.src.major_recommendation_logic import MajorRecommendationLogic
+from services.subject_recommendation.subject_recommendation_system import SubjectRecommendationSystem
+from services.src.major_recommendation_system import MajorRecommendationSystem
 
 
 curriculum_queryset = Curriculum.objects.all()
@@ -18,8 +18,8 @@ school_search = search_engine.SearchEngine(School.objects.select_related('curric
 college_search = search_engine.SearchEngine(College.objects.all(), "college")
 subject_search = search_engine.SearchEngine(Subject.objects.select_related('curriculum'), "subject", curriculum_list)
 major_search = search_engine.SearchEngine(Major.objects.all(), "major")
-subject_recommendation = RecommendationSystem(curriculum_list, Subject.objects.filter(education_level="hsc"))
-major_recommendation = MajorRecommendationLogic(Degree.objects.all(), Major.objects.all())
+subject_recommendation = SubjectRecommendationSystem(curriculum_list, Subject.objects.filter(education_level="hsc"))
+major_recommendation = MajorRecommendationSystem(Degree.objects.all(), Major.objects.all())
 
 
 class SchoolAPIView(views.APIView):
@@ -81,7 +81,7 @@ class SubjectAPIView(views.APIView):
                 education_level = serializer.validated_data.get('education_level')
                 results = subject_search.search(query,
                                                 {'curriculum__abbreviation': curriculum.upper(),
-                                                 'education_level': education_level.upper()
+                                                 'education_level': education_level.lower()
                                                  },
                                                 subject=True)
                 serializer.save()
@@ -230,7 +230,7 @@ class SubjectRecommendationAPIView(views.APIView):
         self.get_serializer_class = SchoolQuerySerializer
 
     """
-    A simple APIView for saving school data to database.
+    A simple APIView for returning subject recommendations, based on the query subjects.
     """
 
     def get(self, request):
@@ -240,7 +240,6 @@ class SubjectRecommendationAPIView(views.APIView):
             if serializer.is_valid(raise_exception=True):
                 # pass the first argument as the query and the second as filter_dictionary
                 query = serializer.validated_data.get('query')
-                print("query: ", query)
                 # all arguments after query are passed as filter_dictionary
                 curriculum = serializer.validated_data.get('curriculum')
                 recommendations = subject_recommendation.recomm_logic(curriculum.upper(), query.split(", ") if query else [])
@@ -258,7 +257,7 @@ class DegreeAPIView(views.APIView):
         self.get_serializer_class = CollegeQuerySerializer
 
     """
-    A simple APIView for saving school data to database.
+    A simple APIView for saving degree data to database.
     """
 
     def post(self, request):
@@ -288,4 +287,3 @@ class DegreeAPIView(views.APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except JSONDecodeError:
             return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-

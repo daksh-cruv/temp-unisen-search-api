@@ -26,8 +26,34 @@ class CheckPickleExists():
         self.run_encode_df()
         self.check_each_pkl()
 
+
+    def file_name_generator(self, dataset_name: str, options: list=None) -> dict:
+
+            """
+            This function generates name of the pkl file based on the dataset.
+            If the dataset is "college", then the pkl file name will be "college_embeddings.pkl"
+            if the dataset is "school" and the options are "cbse", "icse", then the pkl file names will be
+            "school_cbse_embeddings.pkl", "school_icse_embeddings.pkl".
+            """
+
+            if not options:
+                file_names_with_curriculum = {}
+                file_names_with_curriculum[dataset_name] = dataset_name + "_embeddings.pkl"
+            else:
+                file_names_with_curriculum = {}
+                for option in options:
+                    file_names_with_curriculum[option.lower()] = "{}_{}_embeddings.pkl"\
+                        .format(dataset_name, option.lower())
+
+            print("File names generated are:", file_names_with_curriculum)
+            return file_names_with_curriculum
     
+
     def generate_file_names(self):
+        
+        """
+        This function generates the file names based on the dataset and options.
+        """
         if self.options:
             self.file_names = self.file_name_generator(
                 dataset_name = self.dataset,
@@ -38,12 +64,20 @@ class CheckPickleExists():
 
 
     def get_column_list(self) -> None:
+        
+        """
+        This function gets the list of columns required for the dataset from the json file.
+        """
         self.json_file = r"services\data\input\query_data.json"
         self.json_data = json.load(open(self.json_file))
         self.required_columns = self.json_data[self.dataset]["columns_required"]
 
     
     def create_dataframe_from_queryset(self, queryset: list) -> pd.DataFrame:
+        
+        """
+        This function creates a dataframe from the queryset passed to it.
+        """
         data = list(queryset.values_list(*self.required_columns))
         df = pd.DataFrame(data, columns=self.required_columns)
 
@@ -56,36 +90,22 @@ class CheckPickleExists():
 
         return df
 
-    
-    def file_name_generator(self, dataset_name: str, options: list=None) -> dict:
-
-        """
-        This function generates name of the pkl file based on the dataset.
-        If the dataset is "college", then the pkl file name will be "college_embeddings.pkl"
-        if the dataset is "school" and the options are "cbse", "icse", then the pkl file names will be
-        "school_cbse_embeddings.pkl", "school_icse_embeddings.pkl".
-        """
-
-        if not options:
-            file_names_with_curriculum = {}
-            file_names_with_curriculum[dataset_name] = dataset_name + "_embeddings.pkl"
-        else:
-            file_names_with_curriculum = {}
-            for option in options:
-                file_names_with_curriculum[option.lower()] = "{}_{}_embeddings.pkl"\
-                    .format(dataset_name, option.lower())
-
-        print("File names generated are:", file_names_with_curriculum)
-        return file_names_with_curriculum
-
-
     def get_dir_file_names(self) -> list:
+        
+        """
+        This function returns the list of files present in the cache directory
+        """
         path = r"services\data\cache\\"
         dir_list = os.listdir(path)
         return dir_list
 
 
     def check_file_exists(self) -> dict:
+
+        """
+        This function checks if the pkl file exists in the cache directory or not.
+        If the pkl file does not exist, then it returns the name of the pkl file that does not exist.
+        """
         file_not_found = {}
         for option, file_name in self.file_names.items():
             if file_name not in self.file_in_dir_list:
@@ -95,6 +115,12 @@ class CheckPickleExists():
     
 
     def filter_df(self, filters: dict) -> list:
+        
+        """
+        This function filters the dataframe based on the filters passed to it.
+        The filters are passed as a dictionary. Keys are the column names and values are the values
+        to be filtered on.
+        """
         filtered_df = self.df
         for key, value in filters.items():
             if key in filtered_df.columns:
@@ -106,6 +132,10 @@ class CheckPickleExists():
 
 
     def run_encode_df(self) -> None:
+
+        """
+        This function runs the encode_df function for each option in the options list
+        """
         for option, file_name in self.file_not_in_dir.items():
             print("Encoding dataframe for", self.dataset, "dataset and", option.upper(), "option")
             filters = {"curriculum__abbreviation": option.upper()}
@@ -113,6 +143,11 @@ class CheckPickleExists():
 
 
     def encode_df(self, filters: dict, file_name: str) -> None:
+        
+        """
+        This function filters and then encodes the dataframe and saves it as
+        a pkl file in the cache directory.
+        """
         filtered_df = self.filter_df(filters=filters)
         self.train.train(df=filtered_df, file_name=file_name)
     
@@ -154,6 +189,10 @@ class CheckPickleExists():
 
 
     def check_each_pkl(self) -> None:
+
+        """
+        This function checks for updates for each pkl file
+        """
         for option, file_name in self.file_names.items():
             print("For", self.dataset, "dataset and", option, "option")
             filters = {"curriculum__abbreviation": option.upper()}

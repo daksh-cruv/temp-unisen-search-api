@@ -23,9 +23,7 @@ class SearchQuery(models.Model):
     Attributes:
         query (str): The search query received in API calls (can be null).
         curriculum (str): The curriculum of the search query (can be null).
-        It is a foreign key to the Curriculum model.
         education_level (str): The education level of the search query (can be null).
-        It is a foreign key to the EducationLevel model.
     """
 
     class Meta:

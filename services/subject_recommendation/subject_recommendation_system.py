@@ -5,11 +5,12 @@ from sklearn.cluster import KMeans
 from collections import Counter
 from queue import PriorityQueue
 
-class RecommendationSystem:
+class SubjectRecommendationSystem:
     def __init__(self, list_of_boards, subjects_queryset):
         self.list_of_boards = list_of_boards
-        self.df = pd.DataFrame(list(subjects_queryset.values_list("name", flat=True)), columns=["Class 12"])
-        self.subjects_list = self.df['Class 12'].tolist()
+        # Filter for both ssc and hsc accordingly. Take in both
+        self.df = pd.DataFrame(list(subjects_queryset.values_list("name", flat=True)), columns=["hsc"])
+        self.subjects_list = self.df['hsc'].tolist()
         self.model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
         self.subjects_vectors = self.encode_subjects()
         
@@ -70,7 +71,7 @@ class RecommendationSystem:
         Returns: Encoded Subjects"""
 
         vectors = self.model.encode(self.subjects_list)
-        return dict(zip(self.df['Class 12'], vectors))
+        return dict(zip(self.df['hsc'], vectors))
 
     def get_all_streams(self):
         """ The function reads the streams textfile and returns the list of streams 
