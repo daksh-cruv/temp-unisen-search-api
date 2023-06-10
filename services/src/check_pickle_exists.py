@@ -73,19 +73,22 @@ class CheckPickleExists():
         self.required_columns = self.json_data[self.dataset]["columns_required"]
 
     
-    def create_dataframe_from_queryset(self, queryset: list) -> pd.DataFrame:
-        
-        """
-        This function creates a dataframe from the queryset passed to it.
-        """
+    def create_dataframe_from_queryset(self, queryset):
         data = list(queryset.values_list(*self.required_columns))
         df = pd.DataFrame(data, columns=self.required_columns)
 
         if "address" in self.required_columns:
             df["concat"] = df["name"] + " " + df["address"]
+            # clean all the data in concat column
+            df["concat"] = df["concat"].apply(self.loader.clean_string)
+
+        elif "alias" in self.required_columns:
+            df["concat"] = df["name"] + " " + df["alias"].fillna("")
+            # clean all the data in concat column
             df["concat"] = df["concat"].apply(self.loader.clean_string)
         else:
-            df["concat"] = df["name"] 
+            df["concat"] = df["name"]
+            # clean all the data in concat column
             df["concat"] = df["concat"].apply(self.loader.clean_string)
 
         return df

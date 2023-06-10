@@ -12,3 +12,8 @@ class ProfileConstants:
         ('master', 'Masters'),
         ('phd', 'PhD')
     )
+
+
+class SearchConstants:
+    abbr_char_limit = 4
+    abbr_single_word_str_threshold = 5

@@ -1,0 +1,5 @@
+Time taken by fuzzy: 0.0010073184967041016
+Time taken by spellwise: 0.035999298095703125
+Time taken for abbr search: 0.40498995780944824 / 0.5099568367004395
+Overall time taken by pytorch cos sim: 5.292566776275635
+Overall time taken by scipy cos sim: 1.4149925899505615

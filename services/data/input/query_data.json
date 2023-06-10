@@ -3,10 +3,10 @@
         "columns_required": ["name", "address", "curriculum__abbreviation"]
     },
     "college": {
-        "columns_required": ["name", "address"]
+        "columns_required": ["name"]
     },
     "subject": {
-        "columns_required": ["name", "curriculum__abbreviation", "education_level"]
+        "columns_required": ["name", "curriculum__abbreviation", "education_level", "alias"]
     },
     "major": {
         "columns_required": ["name"]

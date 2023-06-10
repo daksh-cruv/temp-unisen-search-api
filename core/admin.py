@@ -19,12 +19,12 @@ class CurriculumDataAdmin(admin.ModelAdmin):
 
 @admin.register(core_models.Subject)
 class SubjectDataAdmin(admin.ModelAdmin):
-    list_display = ('name', 'curriculum', 'education_level', 'id')
+    list_display = ('name', 'curriculum', 'education_level', 'alias','id')
 
 
 @admin.register(core_models.College)
 class CollegeDataAdmin(admin.ModelAdmin):
-    list_display = ('name', 'address', 'id')
+    list_display = ('name', 'country', 'id')
 
 
 @admin.register(core_models.Major)

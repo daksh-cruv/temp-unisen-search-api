@@ -28,10 +28,9 @@ class DataLoader:
     def clean_string(self, s: str) -> str:
         # Convert the string to lowercase and remove unwanted characters using regular expressions.
         # Remove periods, quotes, hyphens, brackets from string using regex
+        # Replace extra spaces with single space using regex: 
         s = s.lower().strip()
+        s = re.sub(r' +', ' ', s)
         s = re.sub(r'[\.\,\"\'\(\)\-]', '', s)
         s = re.sub(r'\b\D\b(\s+\b\D\b)+', lambda x: x.group(0).replace(' ', ''), s)
         return s
-    
-    
-    

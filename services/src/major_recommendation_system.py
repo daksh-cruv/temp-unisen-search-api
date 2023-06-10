@@ -19,10 +19,15 @@ class MajorRecommendationSystem:
     def __init__(self, degrees_queryset, majors_queryset):
         self.train_model = TrainModel()
         self.loader = DataLoader()
-        self.degrees_df = pd.DataFrame(list(degrees_queryset.values_list("name", flat=True)), columns=["degree_title"])
-        self.majors_df = pd.DataFrame(list(majors_queryset.values_list("name", flat=True)), columns=["Name"])
+        self.degrees_df = pd.DataFrame(list(degrees_queryset.values_list("name", flat=True)), columns=["degree_name"])
+        self.majors_df = pd.DataFrame(list(majors_queryset.values_list("name", flat=True)), columns=["major_name"])
+        self.preprocess_data()
         self.generate_mapping_if_not_exists()
+        self.check_if_data_updated()
+        # self.save_mapping_to_csv(r"services\data\cache\major_recommendations.csv")
+        self.csv_mappings = self.create_mapping_from_csv(r"services\data\cache\major_recommendations.csv")
         print("\nInitiated Major Recommendation System\n")
+
 
     def generate_mapping_if_not_exists(self):
 
@@ -33,23 +38,22 @@ class MajorRecommendationSystem:
         try:
             self.mapping = self.load_mapping()
         except FileNotFoundError:
-            print("File not found. Generating mapping...")
+            print("College major recommendations file not found. Generating mapping...")
             self.generate_mapping()
             self.mapping = self.load_mapping()
 
 
     def preprocess_data(self):
-        self.degrees_df['degree_name'] = self.degrees_df['degree_title'].apply(lambda x: x.strip())
-        self.majors_df['major_name'] = self.majors_df['Name'].apply(lambda x: x.strip().title())
+        self.degrees_df['degree_name'] = self.degrees_df['degree_name'].apply(lambda x: x.strip())
+        self.majors_df['major_name'] = self.majors_df['major_name'].apply(lambda x: x.strip().title())
 
     def encode_embeddings(self):
         model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
-        degree_embeddings = model.encode(self.degrees_df['degree_title'].tolist())
-        major_embeddings = model.encode(self.majors_df['Name'].tolist())
+        degree_embeddings = model.encode(self.degrees_df['degree_name'].tolist())
+        major_embeddings = model.encode(self.majors_df['major_name'].tolist())
         self.similarity_matrix = cosine_similarity(degree_embeddings, major_embeddings)
 
     def generate_mapping(self):
-        self.preprocess_data()
         self.encode_embeddings()
         similarity_df = pd.DataFrame(self.similarity_matrix,
                                      columns=self.majors_df['major_name'],
@@ -71,8 +75,46 @@ class MajorRecommendationSystem:
         This function returns the top 3 most similar majors for a given degree.
         """
         try:
-            return self.mapping[degree_name]
+            return self.csv_mappings[degree_name]
         except KeyError:
             return "No recommendations found"
     
-    # updated data checker pkl file
+
+    def check_if_data_updated(self):
+
+        """
+        We will check that the degrees in the database are the same as the degrees in the mapping.
+        If they are not the same, then we will generate a new mapping.
+        """
+        degrees_in_df = self.degrees_df['degree_name'].tolist()
+        degrees_in_mapping = list(self.mapping.keys())
+        if set(degrees_in_df) != set(degrees_in_mapping):
+            print("College major recommendation data is not up to date. Generating new mapping...")
+            self.generate_mapping()
+            self.mapping = self.load_mapping()
+            print("New mapping generated")
+
+# pickle ki jagah data csv me save karna hai. csv me save karne ke liye, dataframe ko csv me convert karna hai.
+# csv se dataframe mein convert karke dict banate 
+# agar csv update ho toh check that also
+
+    def save_mapping_to_csv(self, output_file: str):
+        mapping = self.mapping
+        data = []
+        for degree, majors in mapping.items():
+            data.append([degree, majors])
+        df = pd.DataFrame(data, columns=['degree_name', 'top_3_majors'])
+
+        df.to_csv(output_file, index=False)
+
+        print("Major recommendations CSV file created successfully!")
+
+    def create_mapping_from_csv(self, input_file: str):
+        df = pd.read_csv(input_file)
+        df['top_3_majors'] = df['top_3_majors'].apply(lambda x: eval(x))
+        # mapping = dict(zip(df['degree_name'], df['top_3_majors']))
+        
+        # use to_dict() to convert dataframe to dictionary:
+        mapping = df.set_index('degree_name')['top_3_majors'].to_dict()
+        print("\nMajor recommendation mapping created from CSV file\n")
+        return mapping

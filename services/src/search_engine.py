@@ -4,6 +4,7 @@ import json
 from .data_loader import DataLoader
 import pandas as pd
 from .check_pickle_exists import CheckPickleExists
+from constants import SearchConstants
 
 
 class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
@@ -52,8 +53,14 @@ class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
             df["concat"] = df["name"] + " " + df["address"]
             # clean all the data in concat column
             df["concat"] = df["concat"].apply(self.loader.clean_string)
+
+        elif "alias" in self.required_columns:
+            df["concat"] = df["name"] + " " + df["alias"].fillna("")
+            # clean all the data in concat column
+            df["concat"] = df["concat"].apply(self.loader.clean_string)
+
         else:
-            df["concat"] = df["name"] 
+            df["concat"] = df["name"].apply(self.loader.clean_string)
             # clean all the data in concat column
             df["concat"] = df["concat"].apply(self.loader.clean_string)
 
@@ -118,19 +125,25 @@ class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
         """
 
         words = query.split()
-        if all(len(word) <= 4 for word in words):
+        if all(len(word) <= SearchConstants.abbr_char_limit for word in words):
             results = self.abbreviation_search(query=query, df=filtered_df)
 
-        elif all(len(word) > 4 for word in words):
+        # if the query contains only 1 word, and the word is less than or equal to 4 characters,
+        # perform abbreviation search
+        # TEST
+        elif len(words) == 1 and len(words[0]) <= SearchConstants.abbr_single_word_str_threshold:
+            results = self.abbreviation_search(query=query, df=filtered_df)
+
+        elif all(len(word) > SearchConstants.abbr_char_limit for word in words):
             query = self.loader.clean_string(query)
-            results = self.fuzzy_search(query=query,
+            results = self.fuzzy_using_spellwise(query=query,
                                         df=filtered_df,
                                         embeddings=embeddings)
 
         else:
             abbreviation_results = self.abbreviation_search(query=query, df=filtered_df)
             query = self.loader.clean_string(query)
-            fuzzy_results = self.fuzzy_search(query=query,
+            fuzzy_results = self.fuzzy_using_spellwise(query=query,
                                               df=filtered_df,
                                               embeddings=embeddings)
 
@@ -186,7 +199,6 @@ class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
 
         filtered_df = self.df
         for key, value in filters.items():
-            print("key: ", key, "value: ", value)
             filtered_df = filtered_df[filtered_df[key] == value]
 
         return filtered_df

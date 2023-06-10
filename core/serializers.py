@@ -76,7 +76,7 @@ class SchoolDataSerializer(serializers.ModelSerializer):
 		)
 
 
-class CurriculumSerializer(serializers.ModelSerializer):
+class CurriculumDataSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = models.Curriculum
 		fields = (
@@ -96,7 +96,8 @@ class SubjectDataSerializer(serializers.ModelSerializer):
 		fields = (
 			'name',
 			'curriculum',
-			'education_level'
+			'education_level',
+			'alias'
 		)
 
 

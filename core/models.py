@@ -66,10 +66,14 @@ class Subject(models.Model):
         name (str): The full name of the subject.
         curriculum (str): The curriculum of the subject. It is a foreign key to the Curriculum model.
         education_level (str): The education level of the subject, such as ssc or hsc.
+        alias (str): The alias of the subject, such as math or mathematics, or history and sst for
+        social science.
     """
     name = models.CharField(max_length=255, verbose_name="name")
     curriculum = models.ForeignKey(to=Curriculum, verbose_name="curriculum", on_delete=models.CASCADE)
     education_level = models.CharField(max_length=255, verbose_name="education_level", choices=ProfileConstants.education_level_choices)
+    alias = models.CharField(max_length=255, verbose_name="alias", null=True, blank=True)
+
 
 
     class Meta:
@@ -93,7 +97,7 @@ class College(models.Model):
         verbose_name_plural = "College Data"
     
     name = models.CharField(max_length=255, verbose_name="name")
-    address = models.CharField(max_length=255, verbose_name="country")
+    country = models.CharField(max_length=255, verbose_name="country")
 
     def __str__(self):
         return f'{self.name}'

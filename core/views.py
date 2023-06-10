@@ -18,7 +18,7 @@ school_search = search_engine.SearchEngine(School.objects.select_related('curric
 college_search = search_engine.SearchEngine(College.objects.all(), "college")
 subject_search = search_engine.SearchEngine(Subject.objects.select_related('curriculum'), "subject", curriculum_list)
 major_search = search_engine.SearchEngine(Major.objects.all(), "major")
-subject_recommendation = SubjectRecommendationSystem(curriculum_list, Subject.objects.filter(education_level="hsc"))
+subject_recommendation = SubjectRecommendationSystem(curriculum_list, Subject.objects.select_related('curriculum'))
 major_recommendation = MajorRecommendationSystem(Degree.objects.all(), Major.objects.all())
 
 
@@ -28,6 +28,15 @@ class SchoolAPIView(views.APIView):
 
     """
     A simple APIView for school search and posting school data.
+
+    The get method accepts an API call with the following parameters:
+    query: the school name to search for
+    curriculum: the curriculum abbreviation to filter by
+
+    The post method accepts an API call with the following parameters:
+    name: the name of the school
+    address: the address of the school
+    curriculum: the curriculum abbreviation of the school
     """
 
     def get(self, request):
@@ -68,7 +77,19 @@ class SubjectAPIView(views.APIView):
     post_serializer_class = SubjectDataSerializer
 
     """
-    A simple APIView for creating search entires.
+    A simple APIView for getting and posting subject data.
+
+    The get method accepts an API call with the following parameters:
+    query: the subject name to search for
+    curriculum: the curriculum abbreviation to filter by
+    education_level: the education level to filter by, such as "ssc" or "hsc"
+
+    The post method accepts an API call with the following parameters:
+    name: the name of the subject
+    curriculum: the curriculum abbreviation of the subject
+    education_level: the education level of the subject
+    alias: the alias of the subject, such as "math" for "mathematics", or "history"
+    for "Social Science"
     """
 
     def get(self, request):
@@ -111,45 +132,72 @@ class CollegeAPIView(views.APIView):
     post_serializer_class = CollegeDataSerializer
 
     """
-    A simple APIView for creating search entires.
+    A simple APIView for getting and posting college data.
+
+    The get method accepts an API call with the following parameters:
+    query: the college name to search for
+
+    The post method accepts an API call with the following parameters:
+    name: the name of the college
+    country: the country of the college
     """
 
+    # def get(self, request):
+    #     try:
+    #         data = JSONParser().parse(request)
+    #         serializer = self.get_serializer_class(data=data)
+    #         if serializer.is_valid(raise_exception=True):
+    #             query = serializer.validated_data.get('query')
+    #             results = college_search.search(query)
+    #             serializer.save()
+    #             return Response(results, status=status.HTTP_200_OK)
+    #         else:
+    #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #     except JSONDecodeError:
+    #         return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+
     def get(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.get_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                query = serializer.validated_data.get('query')
-                results = college_search.search(query)
-                serializer.save()
-                return Response(results, status=status.HTTP_200_OK)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-        
+        serializer = self.get_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        query = serializer.validated_data.get('query')
+        results = college_search.search(query)
+        serializer.save()
+        return Response(results, status=status.HTTP_200_OK)
+
+
+    # def post(self, request):
+    #     try:
+    #         data = JSONParser().parse(request)
+    #         serializer = self.post_serializer_class(data=data)
+    #         if serializer.is_valid(raise_exception=True):
+    #             serializer.save()
+    #             return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #         else:
+    #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #     except JSONDecodeError:
+    #         print(serializer.errors)
+    #         return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
 
     def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.post_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            print(serializer.errors)
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
-        
+        serializer = self.post_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
+    
 
 class MajorAPIView(views.APIView):
     get_serializer_class = MajorQuerySerializer
     post_serializer_class = MajorDataSerializer
 
     """
-    A simple APIView for creating search entires.
+    A simple APIView for getting and posting major data.
+
+    The get method accepts an API call with the following parameters:
+    query: the major name to search for
+    
+    The post method accepts an API call with the following parameters:
+    name: the name of the major
+    category: the category of the major, such as "Engineering"
     """
 
     def get(self, request):
@@ -186,7 +234,11 @@ class SaveMajorCategoryAPIView(views.APIView):
         self.serializer_class = MajorCategorySerializer
 
     """
-    A simple APIView for saving school data to database.
+    A simple APIView for saving major category data to database.
+
+    The post method accepts an API call with the following parameters:
+    name: the name of the major category
+
     """
 
     def post(self, request):
@@ -205,10 +257,14 @@ class SaveMajorCategoryAPIView(views.APIView):
 
 class SaveCurriculumAPIView(views.APIView):
     def __init__(self):
-        self.serializer_class = CurriculumSerializer
+        self.serializer_class = CurriculumDataSerializer
 
     """
-    A simple APIView for saving school data to database.
+    A simple APIView for saving curriculum data to database.
+
+    The post method accepts an API call with the following parameters:
+    name: the name of the curriculum
+    abbreviation: the abbreviation of the curriculum
     """
 
     def post(self, request):
@@ -227,10 +283,15 @@ class SaveCurriculumAPIView(views.APIView):
 
 class SubjectRecommendationAPIView(views.APIView):
     def __init__(self):
-        self.get_serializer_class = SchoolQuerySerializer
+        self.get_serializer_class = SubjectQuerySerializer
 
     """
     A simple APIView for returning subject recommendations, based on the query subjects.
+
+    The get method accepts an API call with the following parameters:
+    query: the subjects to search for
+    curriculum: the curriculum to filter by
+    education_level: the education level to filter by
     """
 
     def get(self, request):
@@ -242,7 +303,14 @@ class SubjectRecommendationAPIView(views.APIView):
                 query = serializer.validated_data.get('query')
                 # all arguments after query are passed as filter_dictionary
                 curriculum = serializer.validated_data.get('curriculum')
-                recommendations = subject_recommendation.recomm_logic(curriculum.upper(), query.split(", ") if query else [])
+                education_level = serializer.validated_data.get('education_level')
+                recommendations = subject_recommendation.recomm_logic(
+                                                query.split(", ") if query else [],
+                                                {
+                                                    'curriculum__abbreviation': curriculum.upper(),
+                                                    'education_level': education_level.lower()
+                                                 },
+                                                )
                 serializer.save()
                 return Response(recommendations, status=status.HTTP_200_OK)
             else:
@@ -254,10 +322,18 @@ class SubjectRecommendationAPIView(views.APIView):
 class DegreeAPIView(views.APIView):
     def __init__(self):
         self.post_serializer_class = DegreeDataSerializer
-        self.get_serializer_class = CollegeQuerySerializer
+        self.get_serializer_class = MajorQuerySerializer
 
     """
-    A simple APIView for saving degree data to database.
+    A simple APIView for getting major recommendations based on degree and
+    posting degree data.
+
+    The get method accepts an API call with the following parameters:
+    query: the degree name to get recommendations for
+
+    The post method accepts an API call with the following parameters:
+    name: the name of the degree
+    education_level: the education level of the degree, such as "bachelors" or "masters"
     """
 
     def post(self, request):

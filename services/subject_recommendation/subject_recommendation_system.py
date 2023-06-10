@@ -9,8 +9,15 @@ class SubjectRecommendationSystem:
     def __init__(self, list_of_boards, subjects_queryset):
         self.list_of_boards = list_of_boards
         # Filter for both ssc and hsc accordingly. Take in both
-        self.df = pd.DataFrame(list(subjects_queryset.values_list("name", flat=True)), columns=["hsc"])
-        self.subjects_list = self.df['hsc'].tolist()
+        # the curriculum will be passed in the API call. Filter the dataframe accordingly.
+        self.required_columns = ["name", "curriculum__abbreviation", "education_level"]
+        # self.df = pd.DataFrame(list(subjects_queryset.values_list(*self.required_columns, flat=True)), columns=["name"])
+
+        self.data = list(subjects_queryset.values_list(*self.required_columns))
+        self.df = pd.DataFrame(self.data, columns=self.required_columns)
+
+        #print(self.df.head())
+        self.subjects_list = self.df['name'].tolist()
         self.model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
         self.subjects_vectors = self.encode_subjects()
         
@@ -31,7 +38,7 @@ class SubjectRecommendationSystem:
 
         # print("\nInitiated Recommendation System\n")
 
-    def recomm_logic(self, board, input_subjects):
+    def recomm_logic(self, input_subjects: list, filters: dict):
         """ The function which recommends different logic considering the requirement. If 
         there is no input_subjects passed, it will recommend based on the initial function. 
         If there is a board specified and input subjects are present, it will recommend based 
@@ -39,10 +46,11 @@ class SubjectRecommendationSystem:
         Arguments: input_subjects list.
         Returns: Subject recommendations"""
 
-        self.current_board_streams_file = self.all_boards_streams_files[board]
+        self.current_board_streams_file = self.all_boards_streams_files[filters['curriculum__abbreviation']]
+        self.filtered_df = self.filter_df(filters)
 
         if len(input_subjects) == 0:
-            return self.init_recomm_for_each_board[board]
+            return self.init_recomm_for_each_board[filters['curriculum__abbreviation']]
         if len(input_subjects)>0:
             recommendations = self.get_streamwise_recommendations(input_subjects)
 
@@ -69,9 +77,9 @@ class SubjectRecommendationSystem:
         utilities from the Sentence Transformers library to encode the subjects.
         Expected Input: Subjects list from CSV
         Returns: Encoded Subjects"""
-
+        # save dict as name + education_level
         vectors = self.model.encode(self.subjects_list)
-        return dict(zip(self.df['hsc'], vectors))
+        return dict(zip(self.df['name'], vectors))
 
     def get_all_streams(self):
         """ The function reads the streams textfile and returns the list of streams 
@@ -177,6 +185,14 @@ class SubjectRecommendationSystem:
         file_name = "all_streams_" + curriculum + ".txt"
         return file_path + file_name
 
+
+    def filter_df(self, filters: dict) -> list:
+
+        filtered_df = self.df
+        for key, value in filters.items():
+            filtered_df = filtered_df[filtered_df[key] == value]
+
+        return filtered_df
 
 # board = 'CBSE'
 # input_subjects = ['Chemistry']

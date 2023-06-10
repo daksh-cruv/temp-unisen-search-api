@@ -1,6 +1,7 @@
 from sentence_transformers import SentenceTransformer, util
 import pandas as pd
 from fuzzywuzzy import fuzz, process
+import numpy as np
 
 
 class FuzzySchoolMatcher:
@@ -14,40 +15,48 @@ class FuzzySchoolMatcher:
     perform fuzzy matching on the name column.
     """
     def __init__(self):
-
-        # Define the model name for sentence transformation
         self.model_name = 'all-MiniLM-L6-v2'
-
-        # Initialize the sentence transformer model
         self.model = SentenceTransformer(self.model_name)
 
 
-    def fuzzy_using_ST(self,
+    def fuzzy_using_spellwise(self,
                        query: str,
                        df: pd.DataFrame,
                        embeddings) -> list:
 
         query_embedding = self.model.encode(query)
 
-        similarities = {}
+        # get all the embeddings values in a numpy array
+        embeddings_array = np.array(list(embeddings.values()))
 
-        for name, embedding in embeddings.items():
-            similarity = util.pytorch_cos_sim(query_embedding, embedding)
-            similarities[name] = similarity.item()
-        
-        # Get the indices of the top k most similar embeddings
-        sorted_similarities = sorted(similarities.items(), key=lambda x: x[1], reverse=True)
-        # 30 % weight to fuzzy and 70% weight to context
-        # weighted sum (multiply karo) 0.3 * fuzzy + 0.7 * context (scale context to 100) 
-        # use alias names = for subject search using actual name + alias names
+        query_embedding = np.array(query_embedding)
+        cosine_similarities = util.pytorch_cos_sim(query_embedding, embeddings_array)
+
+        # get the indices of the top k most similar embeddings
         k = 25
-        # Get the indices top k most similar embeddings
-        top_k_entries = sorted_similarities[:k]
+        flattened_cosine_similarities = cosine_similarities.flatten()
+        sorted_indices = (-flattened_cosine_similarities).argsort()[:k]
 
-        top_k_strings = [entry[0] for entry in top_k_entries]
+        # get the top k names
+        top_k_names = [list(embeddings.keys())[index] for index in sorted_indices]
 
-        # Perform fuzzy matching on the top k addresses
-        top_5_matches = process.extractBests(query, top_k_strings, scorer=fuzz.token_set_ratio, limit=5)
+        # get the top k scores from the indices
+        top_k_scores = [flattened_cosine_similarities[index] for index in sorted_indices]
+
+        # Perform fuzzy matching on the top k names
+        top_5_matches = process.extractBests(query, top_k_names, scorer=fuzz.token_set_ratio, limit=5)
+
+        # get respective scores
+        top_5_scores = [top_k_scores[top_k_names.index(match[0])] for match in top_5_matches]
+
+        # convert the tensor values to float and scale similarity scores to 100
+        top_5_scores = [(score.item() * 100) for score in top_5_scores]
+
+        # append the similarity scores to the fuzzy (match, score) tuple
+        top_5_matches = [(match[0], match[1], score) for match, score in zip(top_5_matches, top_5_scores)]
+
+        # do weighted sum of fuzzy and context scores as (0.3 * fuzzy + 0.7 * context)
+        top_5_matches = [(match[0], (match[1] * 0.3) + (match[2] * 0.7)) for match in top_5_matches]
 
         final_list = []
         
