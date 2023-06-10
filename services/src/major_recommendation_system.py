@@ -47,11 +47,13 @@ class MajorRecommendationSystem:
         self.degrees_df['degree_name'] = self.degrees_df['degree_name'].apply(lambda x: x.strip())
         self.majors_df['major_name'] = self.majors_df['major_name'].apply(lambda x: x.strip().title())
 
+
     def encode_embeddings(self):
         model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
         degree_embeddings = model.encode(self.degrees_df['degree_name'].tolist())
         major_embeddings = model.encode(self.majors_df['major_name'].tolist())
         self.similarity_matrix = cosine_similarity(degree_embeddings, major_embeddings)
+
 
     def generate_mapping(self):
         self.encode_embeddings()
@@ -66,9 +68,11 @@ class MajorRecommendationSystem:
         print("Saving degree to major mapping...")
         self.train_model.save_embeddings(top_3_majors_dict, "major_recommendation_embeddings.pkl")
 
+
     def load_mapping(self, input_file="major_recommendation_embeddings.pkl"):
         return self.loader.load_pkl(input_file)
     
+
     def get_recommendations(self, degree_name):
         
         """
@@ -94,9 +98,6 @@ class MajorRecommendationSystem:
             self.mapping = self.load_mapping()
             print("New mapping generated")
 
-# pickle ki jagah data csv me save karna hai. csv me save karne ke liye, dataframe ko csv me convert karna hai.
-# csv se dataframe mein convert karke dict banate 
-# agar csv update ho toh check that also
 
     def save_mapping_to_csv(self, output_file: str):
         mapping = self.mapping
@@ -109,12 +110,10 @@ class MajorRecommendationSystem:
 
         print("Major recommendations CSV file created successfully!")
 
+
     def create_mapping_from_csv(self, input_file: str):
         df = pd.read_csv(input_file)
         df['top_3_majors'] = df['top_3_majors'].apply(lambda x: eval(x))
-        # mapping = dict(zip(df['degree_name'], df['top_3_majors']))
-        
-        # use to_dict() to convert dataframe to dictionary:
         mapping = df.set_index('degree_name')['top_3_majors'].to_dict()
         print("\nMajor recommendation mapping created from CSV file\n")
         return mapping
