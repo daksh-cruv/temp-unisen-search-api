@@ -19,7 +19,7 @@ class FuzzySchoolMatcher:
         self.model = SentenceTransformer(self.model_name)
 
 
-    def fuzzy_using_spellwise(self,
+    def fuzzy_using_ST(self,
                        query: str,
                        df: pd.DataFrame,
                        embeddings) -> list:

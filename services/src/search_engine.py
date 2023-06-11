@@ -136,14 +136,14 @@ class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
 
         elif all(len(word) > SearchConstants.abbr_char_limit for word in words):
             query = self.loader.clean_string(query)
-            results = self.fuzzy_using_spellwise(query=query,
+            results = self.fuzzy_using_ST(query=query,
                                         df=filtered_df,
                                         embeddings=embeddings)
 
         else:
             abbreviation_results = self.abbreviation_search(query=query, df=filtered_df)
             query = self.loader.clean_string(query)
-            fuzzy_results = self.fuzzy_using_spellwise(query=query,
+            fuzzy_results = self.fuzzy_using_ST(query=query,
                                               df=filtered_df,
                                               embeddings=embeddings)
 

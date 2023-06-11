@@ -1,7 +1,4 @@
-from json import JSONDecodeError
-from django.http import JsonResponse
 from .serializers import *
-from rest_framework.parsers import JSONParser
 from rest_framework import views, status
 from rest_framework.response import Response
 from services.src import search_engine
@@ -36,40 +33,23 @@ class SchoolAPIView(views.APIView):
     The post method accepts an API call with the following parameters:
     name: the name of the school
     address: the address of the school
-    curriculum: the curriculum abbreviation of the school
+    curriculum: the curriculum abbreviation of the school. Must be block letters. "CBSE", not "cbse".
     """
 
     def get(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.get_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                # pass the first argument as the query and the second as filter_dictionary
-                query = serializer.validated_data.get('query')
-                # all arguments after query are passed as filter_dictionary
-                curriculum = serializer.validated_data.get('curriculum')
-                results = school_search.search(query, {'curriculum__abbreviation': curriculum.upper()}) 
-                serializer.save()
-                return Response(results, status=status.HTTP_200_OK)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
-    # keep this above for now
+        serializer = self.get_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        query = serializer.validated_data.get('query')
+        curriculum = serializer.validated_data.get('curriculum')
+        results = school_search.search(query, {'curriculum__abbreviation': curriculum.upper()})
+        serializer.save()
+        return Response(results, status=status.HTTP_200_OK)
     
     def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.post_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            print(serializer.errors)
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+        serializer = self.post_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
 
 
 class SubjectAPIView(views.APIView):
@@ -86,45 +66,31 @@ class SubjectAPIView(views.APIView):
 
     The post method accepts an API call with the following parameters:
     name: the name of the subject
-    curriculum: the curriculum abbreviation of the subject
+    curriculum: the curriculum abbreviation of the subject, must be block letters. "CBSE", not "cbse".
     education_level: the education level of the subject
     alias: the alias of the subject, such as "math" for "mathematics", or "history"
     for "Social Science"
     """
 
     def get(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.get_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                query = serializer.validated_data.get('query')
-                curriculum = serializer.validated_data.get('curriculum')
-                education_level = serializer.validated_data.get('education_level')
-                results = subject_search.search(query,
-                                                {'curriculum__abbreviation': curriculum.upper(),
-                                                 'education_level': education_level.lower()
-                                                 },
-                                                subject=True)
-                serializer.save()
-                return Response(results, status=status.HTTP_200_OK)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
+        serializer = self.get_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        query = serializer.validated_data.get('query')
+        curriculum = serializer.validated_data.get('curriculum')
+        education_level = serializer.validated_data.get('education_level')
+        results = subject_search.search(query,
+                                        {'curriculum__abbreviation': curriculum.upper(),
+                                         'education_level': education_level.lower()
+                                         },
+                                        subject=True)
+        serializer.save()
+        return Response(results, status=status.HTTP_200_OK)
 
     def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.post_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            print(serializer.errors)
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+        serializer = self.post_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
 
 
 class CollegeAPIView(views.APIView):
@@ -142,20 +108,6 @@ class CollegeAPIView(views.APIView):
     country: the country of the college
     """
 
-    # def get(self, request):
-    #     try:
-    #         data = JSONParser().parse(request)
-    #         serializer = self.get_serializer_class(data=data)
-    #         if serializer.is_valid(raise_exception=True):
-    #             query = serializer.validated_data.get('query')
-    #             results = college_search.search(query)
-    #             serializer.save()
-    #             return Response(results, status=status.HTTP_200_OK)
-    #         else:
-    #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    #     except JSONDecodeError:
-    #         return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
     def get(self, request):
         serializer = self.get_serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -164,33 +116,19 @@ class CollegeAPIView(views.APIView):
         serializer.save()
         return Response(results, status=status.HTTP_200_OK)
 
-
-    # def post(self, request):
-    #     try:
-    #         data = JSONParser().parse(request)
-    #         serializer = self.post_serializer_class(data=data)
-    #         if serializer.is_valid(raise_exception=True):
-    #             serializer.save()
-    #             return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #         else:
-    #             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    #     except JSONDecodeError:
-    #         print(serializer.errors)
-    #         return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
     def post(self, request):
         serializer = self.post_serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data,status=status.HTTP_201_CREATED)
-    
+
 
 class MajorAPIView(views.APIView):
     get_serializer_class = MajorQuerySerializer
     post_serializer_class = MajorDataSerializer
 
     """
-    A simple APIView for getting and posting major data.
+    A simple APIView for getting and posting college major data.
 
     The get method accepts an API call with the following parameters:
     query: the major name to search for
@@ -201,32 +139,18 @@ class MajorAPIView(views.APIView):
     """
 
     def get(self, request):
-            try:
-                data = JSONParser().parse(request)
-                serializer = self.get_serializer_class(data=data)
-                if serializer.is_valid(raise_exception=True):
-                    query = serializer.validated_data.get('query')
-                    results = major_search.search(query)
-                    serializer.save()
-                    return Response(results, status=status.HTTP_200_OK)
-                else:
-                    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            except JSONDecodeError:
-                return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
+        serializer = self.get_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        query = serializer.validated_data.get('query')
+        results = major_search.search(query)
+        serializer.save()
+        return Response(results, status=status.HTTP_200_OK)
 
     def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.post_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            print(serializer.errors)
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+        serializer = self.post_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
 
 
 class SaveMajorCategoryAPIView(views.APIView):
@@ -242,17 +166,10 @@ class SaveMajorCategoryAPIView(views.APIView):
     """
 
     def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            print(serializer.errors)
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
         
 
 class SaveCurriculumAPIView(views.APIView):
@@ -264,21 +181,14 @@ class SaveCurriculumAPIView(views.APIView):
 
     The post method accepts an API call with the following parameters:
     name: the name of the curriculum
-    abbreviation: the abbreviation of the curriculum
+    abbreviation: the abbreviation of the curriculum in block letters.
     """
 
     def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            print(serializer.errors)
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
 
 
 class SubjectRecommendationAPIView(views.APIView):
@@ -295,34 +205,26 @@ class SubjectRecommendationAPIView(views.APIView):
     """
 
     def get(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.get_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                # pass the first argument as the query and the second as filter_dictionary
-                query = serializer.validated_data.get('query')
-                # all arguments after query are passed as filter_dictionary
-                curriculum = serializer.validated_data.get('curriculum')
-                education_level = serializer.validated_data.get('education_level')
-                recommendations = subject_recommendation.recomm_logic(
-                                                query.split(", ") if query else [],
-                                                {
-                                                    'curriculum__abbreviation': curriculum.upper(),
-                                                    'education_level': education_level.lower()
-                                                 },
-                                                )
-                serializer.save()
-                return Response(recommendations, status=status.HTTP_200_OK)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
-
+        serializer = self.get_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        query = serializer.validated_data.get('query')
+        curriculum = serializer.validated_data.get('curriculum')
+        education_level = serializer.validated_data.get('education_level')
+        recommendations = subject_recommendation.recomm_logic(
+                                                    query.split(", ") if query else [],
+                                                    {
+                                                        'curriculum__abbreviation': curriculum.upper(),
+                                                        'education_level': education_level.lower()
+                                                        },
+                                                    )
+        serializer.save()
+        return Response(recommendations, status=status.HTTP_200_OK)
+    
 
 class DegreeAPIView(views.APIView):
     def __init__(self):
-        self.post_serializer_class = DegreeDataSerializer
         self.get_serializer_class = MajorQuerySerializer
+        self.post_serializer_class = DegreeDataSerializer
 
     """
     A simple APIView for getting major recommendations based on degree and
@@ -333,33 +235,66 @@ class DegreeAPIView(views.APIView):
 
     The post method accepts an API call with the following parameters:
     name: the name of the degree
-    education_level: the education level of the degree, such as "bachelors" or "masters"
+    education_level: the education level of the degree, such as "bachelor" or "master"
     """
 
+    def get(self, request):
+        serializer = self.get_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        query = serializer.validated_data.get('query')
+        results = major_recommendation.get_recommendations(query)
+        serializer.save()
+        return Response(results, status=status.HTTP_200_OK)
+
     def post(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.post_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            print(serializer.errors)
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+        serializer = self.post_serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
     
 
-    def get(self, request):
-        try:
-            data = JSONParser().parse(request)
-            serializer = self.get_serializer_class(data=data)
-            if serializer.is_valid(raise_exception=True):
-                query = serializer.validated_data.get('query')
-                results = major_recommendation.get_recommendations(query)
-                serializer.save()
-                return Response(results, status=status.HTTP_200_OK)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except JSONDecodeError:
-            return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+
+# class DegreeAPIView(views.APIView):
+#     def __init__(self):
+#         self.get_serializer_class = MajorQuerySerializer
+#         self.post_serializer_class = DegreeDataSerializer
+
+#     """
+#     A simple APIView for getting major recommendations based on degree and
+#     posting degree data.
+
+#     The get method accepts an API call with the following parameters:
+#     query: the degree name to get recommendations for
+
+#     The post method accepts an API call with the following parameters:
+#     name: the name of the degree
+#     education_level: the education level of the degree, such as "bachelor" or "master"
+#     """
+
+#     def post(self, request):
+#         try:
+#             data = JSONParser().parse(request)
+#             serializer = self.post_serializer_class(data=data)
+#             if serializer.is_valid(raise_exception=True):
+#                 serializer.save()
+#                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+#             else:
+#                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         except JSONDecodeError:
+#             print(serializer.errors)
+#             return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)
+    
+
+#     def get(self, request):
+#         try:
+#             data = JSONParser().parse(request)
+#             serializer = self.get_serializer_class(data=data)
+#             if serializer.is_valid(raise_exception=True):
+#                 query = serializer.validated_data.get('query')
+#                 results = major_recommendation.get_recommendations(query)
+#                 serializer.save()
+#                 return Response(results, status=status.HTTP_200_OK)
+#             else:
+#                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         except JSONDecodeError:
+#             return JsonResponse({"result": "error","message": "Json decoding error"}, status= 400)

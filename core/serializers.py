@@ -1,8 +1,5 @@
 from . import models
 from rest_framework import serializers
-from rest_framework.fields import CharField
-from services.src import search_engine
-
 
 
 class SchoolQuerySerializer(serializers.ModelSerializer):
@@ -25,12 +22,6 @@ class SubjectQuerySerializer(serializers.ModelSerializer):
 			'curriculum',
 			'education_level'
 		)
-	
-	# def save(self):
-	# 	query = self.validated_data.get('query')
-	# 	curriculum = self.validated_data.get('curriculum')
-	# 	results = search.search(query, curriculum, subject_or_major=True)
-	# 	return results
 
 
 class CollegeQuerySerializer(serializers.ModelSerializer):
@@ -40,11 +31,6 @@ class CollegeQuerySerializer(serializers.ModelSerializer):
 			'query',
 			'curriculum'
 		)
-	
-	# def save(self):
-	# 	query = self.validated_data.get('query')
-	# 	results = search.search(query)
-	# 	return results
 
 
 class MajorQuerySerializer(serializers.ModelSerializer):
@@ -53,11 +39,6 @@ class MajorQuerySerializer(serializers.ModelSerializer):
 		fields = (
 			'query',
 		)
-	
-	# def save(self):
-	# 	query = self.validated_data.get('query')
-	# 	results = search.search(query, subject_or_major=True)
-	# 	return results
 
 
 class SchoolDataSerializer(serializers.ModelSerializer):
@@ -72,7 +53,7 @@ class SchoolDataSerializer(serializers.ModelSerializer):
 			'pk',
 			'name',
 			'address',
-			'curriculum'
+			'curriculum',
 		)
 
 
