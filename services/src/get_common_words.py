@@ -1,6 +1,7 @@
 import sys
 import pandas as pd
 from collections import Counter
+from constants import SearchConstants
 
 
 class GetCommonWords:
@@ -29,7 +30,7 @@ class GetCommonWords:
         final_words_list = []
 
         for word, count in most_common_words:
-            if len(word) <= 4 and len(word) > 1:
+            if len(word) <= SearchConstants.abbr_char_limit and len(word) > 1:
                 final_words_list.append(word)
 
         return final_words_list

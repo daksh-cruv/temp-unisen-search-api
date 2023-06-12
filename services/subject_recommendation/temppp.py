@@ -5,25 +5,18 @@ from sklearn.cluster import KMeans
 from collections import Counter
 from queue import PriorityQueue
 
-class SubjectRecommendationSystem:
+class RecommendationSystem:
     def __init__(self, list_of_boards, subjects_queryset):
         self.list_of_boards = list_of_boards
         self.subjects_queryset = subjects_queryset
         self.model = SentenceTransformer('multi-qa-MiniLM-L6-cos-v1')
         self.streams_df = pd.read_csv(r"services\subject_recommendation\train\all_streams.csv", header=0)
-
-        # required columns for the dataframe
         self.required_columns = ["name", "curriculum__abbreviation", "education_level"]
-
-        # dictionary of all boards and their subjects df
         self.all_boards_subjects_df = self.get_subjects_df_of_all_boards()
 
+    # A function to get subjects of all boards from list of boards, and store them as dictionary
+    # with board as key and values as dataframe of subjects of that board
     def get_subjects_df_of_all_boards(self):
-        """
-        A function to get subjects of all boards from list of boards, and store them as dictionary,
-        with board as key and values as dataframe of subjects of that board
-        """
-
         subjects_of_all_boards = {}
         df_from_queryset = pd.DataFrame(list(self.subjects_queryset
                                              .values_list(*self.required_columns)),
@@ -37,22 +30,21 @@ class SubjectRecommendationSystem:
         return self.all_boards_subjects_df[board]
 
     def filter_logic_combinations(self, curriculum, education_level):
-        """This function filters the dataframe of streams based on the curriculum and education level"""
-
         df = self.streams_df
         data_streamcomb = {}
+        columns = df.columns.tolist()
         for index, row in df.iterrows():
             if row['curriculum'] == curriculum and row['education_level'] == education_level:
                 data_streamcomb[index] = tuple(row['streams'].split(', '))
         return data_streamcomb
 
     def filter_logic_subjects(self, curriculum, education_level):
-        # for the fallback, subjects from the main subjects database are used
+        # for the fallback, subjects from the main unisen database
         df = self.select_df_by_board(curriculum)
         data_subjects = {}
 
         for index, row in df.iterrows():
-            if row['curriculum__abbreviation'] == curriculum.lower() and row['education_level'] == education_level.lower():
+            if row['curriculum'] == curriculum.lower() and row['education_level'] == education_level.lower():
                 data_subjects[index] = row['name']
         return data_subjects
 
@@ -182,9 +174,9 @@ class SubjectRecommendationSystem:
         return recommended_subjects
 
 
-# curriculum = 'CBSE'
-# education_level = 'hsc'
-# input_subjects = ['Hindi']
-# recommendation_system = RecommendationSystem()
-# recommendations = recommendation_system.recomm_logic(input_subjects, curriculum, education_level)
-# print(recommendations)
+curriculum = 'CBSE'
+education_level = 'hsc'
+input_subjects = ['Hindi']
+recommendation_system = RecommendationSystem()
+recommendations = recommendation_system.recomm_logic(input_subjects, curriculum, education_level)
+print(recommendations)

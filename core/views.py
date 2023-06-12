@@ -212,10 +212,8 @@ class SubjectRecommendationAPIView(views.APIView):
         education_level = serializer.validated_data.get('education_level')
         recommendations = subject_recommendation.recomm_logic(
                                                     query.split(", ") if query else [],
-                                                    {
-                                                        'curriculum__abbreviation': curriculum.upper(),
-                                                        'education_level': education_level.lower()
-                                                        },
+                                                    curriculum,
+                                                    education_level
                                                     )
         serializer.save()
         return Response(recommendations, status=status.HTTP_200_OK)

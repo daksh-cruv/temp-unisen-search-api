@@ -1,14 +1,9 @@
 from django.urls import path
 from django.contrib import admin
 from core import views as core_views
-from rest_framework import routers
 
 
-router = routers.DefaultRouter()
-
-urlpatterns = router.urls
-
-urlpatterns += [
+urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/school', core_views.SchoolAPIView.as_view()),
     path('profile/school/subject', core_views.SubjectAPIView.as_view()),

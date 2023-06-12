@@ -16,17 +16,15 @@ class AbbrSchoolMatcher:
     """
     def __init__(self):
         self.common_words_set = {'sec', 'st', 'sr', 'the', 'of', 'new', 'no'}
-    # try less than equal to 5 chars
+
     def abbreviation_search(self,
                             query: str,
                             df: pd.DataFrame) -> list:
         # find the time taken to run the function
         start_time = time.time()
 
-        print(df.head())
-        print("Entered abbreviation search")
         selected = []
-        query_words_list = query.strip().lower().split(" ") # query words list, use better variable name
+        query_words_list = query.strip().lower().split(" ")
         full_words = []
 
         # If the length of the query is bigger than 1, it means that there are more than 1 words in the query.
@@ -42,17 +40,18 @@ class AbbrSchoolMatcher:
                 if word in self.common_words_set or len(word) > SearchConstants.abbr_char_limit:
                     query_list_copy.remove(word)
                     full_words.append(word)
-# if single word and less than equal to 5 chars and not in common_words_set then its an abbreviation
-# default case mein 4 length ka word hai toh usko bhi consider karo
+
             """
-            If the new_search_string is still bigger than length 1,
+            If the query_list_copy is still bigger than length 1,
             it means there are more than 1 word that are not in common_words_set or smaller than 4 chars.
-            So we assume that the first word is the institute name and assign it to new_search_string
+            So we assume that the first word is the institute name and assign it to query_list_copy
             and the rest is the place.
+            Also, we have not appended the full_words list to the place variable in if block.
+            This is because we use it to form the address regex pattern later in the code anyway.
             """
             if len(query_list_copy) > 1:
                 place = " ".join(query_list_copy[1:])
-                query_list_copy = query_list_copy[0] # change variable name
+                query_list_copy = query_list_copy[0]
             else:
                 place = " ".join(full_words)
 
@@ -62,7 +61,7 @@ class AbbrSchoolMatcher:
 
             # Flatten the list of letters
             list_of_letters = [letter for sublist in list_of_letters for letter in sublist]
-            pattern = r"^(\b" + r"[a-z]*\s+".join(list_of_letters) + r"[a-z]*\b)"
+            pattern = r"^(\b" + r"[a-z]*\s+\b".join(list_of_letters) + r"[a-z]*\b)"
             query_words_list = "".join(list_of_letters) + " " + " ".join(full_words)
         else:
             
@@ -70,12 +69,12 @@ class AbbrSchoolMatcher:
             # most likely it is the institute name.
             place = ""
             query_words_list = query_words_list[0]
-            pattern = r"^(\b" + r"[a-z]*\s+".join(query_words_list) + r"[a-z]*\b){e<=2}"
+            pattern = r"^(\b" + r"[a-z]*\b\s+".join(query_words_list) + r"[a-z]*\b){e<=2}"
         # beech mein 1-2 extra letters aa jaaye abbr mein toh chalega
         # agar sequentially iit aa raha and beech mein kuch aur aa raha toh bhi chalega
         # iit should match to iiot
-        # dont use error regex
-        # optional patters daal dena, iit ka toh iiot bhi match karega
+        # dont use error regex iit ko iiot
+        # optional patterns daal dena, iit ka toh iiot bhi match karega
 
         # If place is equal to full_words, it means that place variable is not required,
         # so we can just use the full_words variable
@@ -112,9 +111,9 @@ class AbbrSchoolMatcher:
 
         else:
             for school in df["name"]:
+
                 for match in re.finditer(pattern, school.strip().lower()):
                     full_name = match.group(0).strip()
-                    print(full_name)
                     split_name = full_name.split(" ")
 
                     if len(split_name) > 1:
@@ -130,7 +129,6 @@ class AbbrSchoolMatcher:
             # Since we are not using the address, we can return the top 10 results from here only
 
             return selected[:10]
-        print(pattern)
         """
         School names have been selected, now we need to select the top addresses.
         Make a regex for the address.
@@ -145,7 +143,6 @@ class AbbrSchoolMatcher:
         final_list = []
 
         # Loop over the schools in the selected_schools list to check if the address matches the regex
-        print(selected[0:10])
         for school in selected:
             name = school[0]
             address = school[1]
@@ -197,7 +194,6 @@ class AbbrSchoolMatcher:
         end_time = time.time()
         print("\nTime taken for abbr search: ", end_time - start_time)
         print()
-        # print time in seconds
         
         return top_ten
 
