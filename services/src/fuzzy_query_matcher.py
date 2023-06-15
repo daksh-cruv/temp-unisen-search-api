@@ -2,9 +2,10 @@ from sentence_transformers import SentenceTransformer, util
 import pandas as pd
 from fuzzywuzzy import fuzz, process
 import numpy as np
+import time
 
 
-class FuzzySchoolMatcher:
+class FuzzyQueryMatcher:
 
     """
     In the below class, we have used sentence transformer model to encode the school names
@@ -12,7 +13,7 @@ class FuzzySchoolMatcher:
     the dataset embeddings to find the top k most similar embeddings. After that, use fuzzywuzzy
     to find the top 5 most similar strings from the top k matches, using the token_set_ratio scorer.
     We assume name and address columns to be present. If address column is not present, we only
-    perform fuzzy matching on the name column.
+    return matches from the name column.
     """
     def __init__(self):
         self.model_name = 'all-MiniLM-L6-v2'
@@ -23,7 +24,8 @@ class FuzzySchoolMatcher:
                        query: str,
                        df: pd.DataFrame,
                        embeddings) -> list:
-
+        # start_time = time.time()
+        print("Inside fuzzy_using_ST")
         query_embedding = self.model.encode(query)
 
         # get all the embeddings values in a numpy array
@@ -43,7 +45,7 @@ class FuzzySchoolMatcher:
         # get the top k scores from the indices
         top_k_scores = [flattened_cosine_similarities[index] for index in sorted_indices]
 
-        # Perform fuzzy matching on the top k names
+        # Perform fuzzy matching on the top k names to find top 5 matches
         top_5_matches = process.extractBests(query, top_k_names, scorer=fuzz.token_set_ratio, limit=5)
 
         # get respective scores
@@ -52,7 +54,7 @@ class FuzzySchoolMatcher:
         # convert the tensor values to float and scale similarity scores to 100
         top_5_scores = [(score.item() * 100) for score in top_5_scores]
 
-        # append the similarity scores to the fuzzy (match, score) tuple
+        # append the cos similarity scores to the fuzzy (match, score) tuple
         top_5_matches = [(match[0], match[1], score) for match, score in zip(top_5_matches, top_5_scores)]
 
         # do weighted sum of fuzzy and context scores as (0.3 * fuzzy + 0.7 * context)
@@ -63,6 +65,7 @@ class FuzzySchoolMatcher:
         # Extract the school name, address, and score for the top 5 matches and append
         # them to the final list.
         for match in top_5_matches:
+            print(match)
             try:
                 name = df.loc[df["concat"] == match[0], "name"].values[0]
             except IndexError:
@@ -76,4 +79,5 @@ class FuzzySchoolMatcher:
                 # If the dataframe does not have the address column, then append only the name and score
                 final_list.append((name.title(), score))
 
+        # print("Time taken for fuzzy_using_ST: ", time.time() - start_time)
         return final_list

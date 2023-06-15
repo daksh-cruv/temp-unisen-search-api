@@ -1,5 +1,5 @@
-from .abbr_school_matcher import AbbrSchoolMatcher
-from .fuzzy_school_matcher import FuzzySchoolMatcher
+from .abbr_query_matcher import AbbrQueryMatcher
+from .fuzzy_query_matcher import FuzzyQueryMatcher
 import json
 from .data_loader import DataLoader
 import pandas as pd
@@ -7,7 +7,7 @@ from .check_pickle_exists import CheckPickleExists
 from constants import SearchConstants
 
 
-class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
+class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
 
     """
     This class loads the Dataframe and PKL files into memory and performs search.
@@ -34,37 +34,15 @@ class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
         self.dataset = dataset
         self.required_columns = self.get_required_column_list(dataset=self.dataset)
         self.queryset = queryset
-        self.df = self.create_dataframe_from_queryset(self.queryset)
+        self.df = self.loader.create_dataframe_from_queryset(self.queryset, self.required_columns)
 
         # Initialize the AbbrSchoolMatcher and FuzzySchoolMatcher classes
         super().__init__()
-        super(AbbrSchoolMatcher, self).__init__()
+        super(AbbrQueryMatcher, self).__init__()
 
 
     def get_required_column_list(self, dataset: str):
         return self.json_data[dataset]["columns_required"]
-
-
-    def create_dataframe_from_queryset(self, queryset):
-        data = list(queryset.values_list(*self.required_columns))
-        df = pd.DataFrame(data, columns=self.required_columns)
-
-        if "address" in self.required_columns:
-            df["concat"] = df["name"] + " " + df["address"]
-            # clean all the data in concat column
-            df["concat"] = df["concat"].apply(self.loader.clean_string)
-
-        elif "alias" in self.required_columns:
-            df["concat"] = df["name"] + " " + df["alias"].fillna("")
-            # clean all the data in concat column
-            df["concat"] = df["concat"].apply(self.loader.clean_string)
-
-        else:
-            df["concat"] = df["name"].apply(self.loader.clean_string)
-            # clean all the data in concat column
-            df["concat"] = df["concat"].apply(self.loader.clean_string)
-
-        return df
 
 
     def pkl_data_loader(self):
@@ -156,12 +134,20 @@ class SearchEngine(AbbrSchoolMatcher, FuzzySchoolMatcher):
             If the count of short words is less than the count of long words, adjust the score of fuzzy results,
             else adjust the score of abbreviation results.
             """
-            if count_short_words < count_long_words:
-                results = [(name, address, score + 10) if score is not None else None for name, address, score in fuzzy_results] + abbreviation_results
-            else:
-                results = fuzzy_results + [(name, address, score + 10) if score is not None else None for name, address, score in abbreviation_results]
-                # results = fuzzy_results + abbreviation_results
-        
+            try:
+                if count_short_words < count_long_words:
+                    results = [(name, address, score + 10) if score is not None else None for name, address, score in fuzzy_results] + abbreviation_results
+                else:
+                    results = fuzzy_results + [(name, address, score + 10) if score is not None else None for name, address, score in abbreviation_results]
+            except ValueError:
+                
+                """
+                ValueError occurs when the score is None in either fuzzy or abbreviation results.
+                Score is None when no matches are not found in the dataset.
+                In this case, we simply combine the results.
+                """
+                results = fuzzy_results + abbreviation_results
+
         # Filter out non-null results, sort by score, and return
         non_null_results = [result for result in results if result is not None]
         try:

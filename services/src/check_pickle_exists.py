@@ -17,7 +17,9 @@ class CheckPickleExists():
         self.queryset = queryset
 
         self.get_column_list()
-        self.df = self.create_dataframe_from_queryset(queryset=queryset)
+        self.df = self.loader.create_dataframe_from_queryset(
+            queryset=queryset,
+            required_columns=self.required_columns)
 
         self.generate_file_names()
         self.file_in_dir_list = self.get_dir_file_names()
@@ -72,26 +74,6 @@ class CheckPickleExists():
         self.json_data = json.load(open(self.json_file))
         self.required_columns = self.json_data[self.dataset]["columns_required"]
 
-    
-    def create_dataframe_from_queryset(self, queryset):
-        data = list(queryset.values_list(*self.required_columns))
-        df = pd.DataFrame(data, columns=self.required_columns)
-
-        if "address" in self.required_columns:
-            df["concat"] = df["name"] + " " + df["address"]
-            # clean all the data in concat column
-            df["concat"] = df["concat"].apply(self.loader.clean_string)
-
-        elif "alias" in self.required_columns:
-            df["concat"] = df["name"] + " " + df["alias"].fillna("")
-            # clean all the data in concat column
-            df["concat"] = df["concat"].apply(self.loader.clean_string)
-        else:
-            df["concat"] = df["name"]
-            # clean all the data in concat column
-            df["concat"] = df["concat"].apply(self.loader.clean_string)
-
-        return df
 
     def get_dir_file_names(self) -> list:
         
