@@ -23,8 +23,6 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
             options=options
             )
         self.file_names = self.checker.get_file_names()
-
-        # load data from json file
         self.json_file = r"services\data\input\query_data.json"
         self.json_data = json.load(open(self.json_file))
 
@@ -34,9 +32,9 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
         self.dataset = dataset
         self.required_columns = self.get_required_column_list(dataset=self.dataset)
         self.queryset = queryset
-        self.df = self.loader.create_dataframe_from_queryset(self.queryset, self.required_columns)
+        self.df = self.loader.create_dataframe_from_queryset(self.queryset,
+                                                             self.required_columns)
 
-        # Initialize the AbbrSchoolMatcher and FuzzySchoolMatcher classes
         super().__init__()
         super(AbbrQueryMatcher, self).__init__()
 
@@ -60,7 +58,6 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
             return pkl_data
 
     
-    # function to subject search using fuzzy only
     def subject_search(self, query: str, filters: dict, embeddings) -> list:
 
         filtered_df = self.filter_df(filters=filters)
@@ -85,7 +82,7 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
             filtered_df = self.df
             embeddings = self.select_dataset()
         
-        
+
         if subject:
             return self.subject_search(
                 query=query,
@@ -93,23 +90,23 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
                 embeddings=embeddings
                 )
 
-
         """
-        Perform search based on word lengths in the query.
-        if all words are less than or equal to 4 characters, perform abbreviation search
-        if all words are greater than 4 characters, perform fuzzy search
-        else perform both and combine the results.
+        Perform search based on word lengths in the query. If all words are less than or
+        equal to 4 characters, perform abbreviation search. If all words are greater than
+        4 characters, perform fuzzy search, else perform both and combine the results.
         Fuzzy search requires a cleaned string, abbreviation search does not.
         """
 
         words = query.split()
         if all(len(word) <= SearchConstants.abbr_char_limit for word in words):
             results = self.abbreviation_search(query=query, df=filtered_df)
-
-        # if the query contains only 1 word, and the word is less than or equal to 4 characters,
-        # perform abbreviation search
-        # TEST
+        
         elif len(words) == 1 and len(words[0]) <= SearchConstants.abbr_single_word_str_threshold:
+            """
+            If the query contains only 1 word, and the word is less than or equal to 5
+            characters, perform abbreviation search.
+            """
+
             results = self.abbreviation_search(query=query, df=filtered_df)
 
         elif all(len(word) > SearchConstants.abbr_char_limit for word in words):
@@ -125,20 +122,23 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
                                               df=filtered_df,
                                               embeddings=embeddings)
 
-            # Count the number of words with length <= 4 and > 4
             count_short_words = sum(1 for word in words if len(word) <= 4)
             count_long_words = sum(1 for word in words if len(word) > 4)
 
             """
-            Adjust the score based on the count of short and long words.
-            If the count of short words is less than the count of long words, adjust the score of fuzzy results,
+            Adjust the score based on the count of short and long words. If the count of
+            short words is less than the count of long words, adjust the score of fuzzy results,
             else adjust the score of abbreviation results.
             """
             try:
                 if count_short_words < count_long_words:
-                    results = [(name, address, score + 10) if score is not None else None for name, address, score in fuzzy_results] + abbreviation_results
+                    results = [(name, address, score + 10) 
+                               if score is not None else None 
+                               for name, address, score in fuzzy_results] + abbreviation_results
                 else:
-                    results = fuzzy_results + [(name, address, score + 10) if score is not None else None for name, address, score in abbreviation_results]
+                    results = fuzzy_results + [(name, address, score + 10) 
+                                               if score is not None else None 
+                                               for name, address, score in abbreviation_results]
             except ValueError:
                 
                 """
@@ -148,16 +148,15 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
                 """
                 results = fuzzy_results + abbreviation_results
 
-        # Filter out non-null results, sort by score, and return
-        non_null_results = [result for result in results if result is not None]
+        not_null_results = [result for result in results if result is not None]
         try:
-            non_null_results.sort(key=lambda x: x[2], reverse=True)
+            not_null_results.sort(key=lambda x: x[2], reverse=True)
         except IndexError:
-            non_null_results.sort(key=lambda x: x[1], reverse=True)
+            not_null_results.sort(key=lambda x: x[1], reverse=True)
         except Exception:
-            return non_null_results
+            return not_null_results
         
-        return non_null_results
+        return not_null_results
 
 
     def fuzzy_search(self,
@@ -165,31 +164,24 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
                      df: pd.DataFrame,
                      embeddings) -> list:
 
-        # Perform fuzzy search using FuzzySchoolMatcher's fuzzy_using_ST method
         return super().fuzzy_using_ST(query=query,
                                       df=df,
                                       embeddings=embeddings)
-
 
     def abbreviation_search(self,
                             query: str,
                             df = pd.DataFrame) -> list:
 
-        # Perform abbreviation search using AbbrSchoolMatcher's abbreviation_search method
-        return super().abbreviation_search(query=query, df=df)
+        return super().abbreviation_search(query=query.strip().lower(), df=df)
 
 
-    # function to filter the dataframe based on the filters
-    # filters is a dictionary with key as column name and value as the value to be filtered
     def filter_df(self, filters: dict) -> list:
-
+        """
+        Function to filter the dataframe based on the filters. "filters" is a dictionary
+        with key as column name and value as the value to be filtered.
+        """
         filtered_df = self.df
         for key, value in filters.items():
             filtered_df = filtered_df[filtered_df[key] == value]
 
         return filtered_df
-
-
-# search = SearchEngine()
-# res = search.search(query="dps rkp", board="cbse")
-# print(res)

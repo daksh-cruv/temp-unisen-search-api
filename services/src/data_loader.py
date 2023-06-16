@@ -6,11 +6,10 @@ import re
 class DataLoader:
 
     """
-    The following class is used to load the data from the csv files, as well as the encoded pkl files.
-    It cleans the data in dataframe by removing unwanted characters and converting the string to lowercase.
+    The following class is used to load the data from the pkl files.
+    It cleans the data in dataframe by removing unwanted characters.
     """
 
-    # Function to load the pkl file using pickle
     def load_pkl(self, file_name: str):
         dir_path = r"services\data\cache\\"
         file_path = dir_path + file_name
@@ -18,41 +17,35 @@ class DataLoader:
             return pickle.load(f)
 
 
-    # Function to clean the data in the dataframe
     def clean_data(self, df: pd.DataFrame, column: str) -> pd.DataFrame:
         df[column] = df[column].apply(self.clean_string)
         return df
 
 
-    # Function to clean the string
     def clean_string(self, s: str) -> str:
-        # Convert the string to lowercase and remove unwanted characters using regular expressions.
-        # Remove periods, quotes, hyphens, brackets from string using regex
-        # Replace extra spaces with single space using regex: 
         s = s.lower().strip()
         s = re.sub(r' +', ' ', s)
         s = re.sub(r'[\.\,\"\'\(\)\-]', '', s)
         s = re.sub(r'\b\D\b(\s+\b\D\b)+', lambda x: x.group(0).replace(' ', ''), s)
         return s
     
+
     def remove_extra_spaces(self, s: str) -> str:
-        # Replace extra spaces with single space using regex: 
         s = re.sub(r' +', ' ', s)
         return s
-    
+
 
     def create_abbreviation(self, s: str) -> str:
-        # Create abbreviation from the string
-        split_name = s.split(" ")
-        if len(split_name) > 1:
-            first_letters = [name[0] for name in split_name]
-            full_name_abbr = "".join(first_letters)
+        split_s = s.split(" ")
+        if len(split_s) > 1:
+            first_letters = [word[0] for word in split_s]
+            abbr = "".join(first_letters)
         else:
-            full_name_abbr = split_name[0]
+            abbr = split_s[0]
         
         # remove numbers from the abbreviation
-        full_name_abbr = re.sub(r'\d+', '', full_name_abbr)
-        return full_name_abbr.strip().lower()
+        abbr = re.sub(r'\d+', '', abbr)
+        return abbr.strip().lower()
     
 
     def create_dataframe_from_queryset(self,
@@ -69,18 +62,31 @@ class DataLoader:
 
         if "address" in required_columns:
             df["name"] = df["name"].apply(self.remove_extra_spaces)
-            df["name_in_abbr"] = df["name"].apply(self.create_abbreviation)
-            df["address_in_abbr"] = df["address"].apply(self.create_abbreviation)
+            df["name_first_letter_ascii"] = df["name"].apply(self.get_first_char_ascii)
+            df["name_abbr"] = df["name"].apply(self.create_abbreviation)
+            df["address_abbr"] = df["address"].apply(self.create_abbreviation)
             df["concat"] = df["name"] + " " + df["address"]
             df["concat"] = df["concat"].apply(self.clean_string)
         elif "alias" in required_columns:
             df["name"] = df["name"].apply(self.remove_extra_spaces)
+            df["name_first_letter_ascii"] = df["name"].apply(self.get_first_char_ascii)
             df["concat"] = df["name"] + " " + df["alias"].fillna("")
             df["concat"] = df["concat"].apply(self.clean_string)
         else:
             df["name"] = df["name"].apply(self.remove_extra_spaces)
-            df["name_in_abbr"] = df["name"].apply(self.create_abbreviation)
+            df["name_first_letter_ascii"] = df["name"].apply(self.get_first_char_ascii)
+            df["name_abbr"] = df["name"].apply(self.create_abbreviation)
             df["concat"] = df["name"].apply(self.clean_string)
             df["concat"] = df["concat"].apply(self.clean_string)
 
+        # using dictionary to convert specific columns to specific datatype
+        convert_dict = {
+                        'name_first_letter_ascii': int
+                        }
+        df = df.astype(convert_dict)
         return df
+
+
+    def get_first_char_ascii(self, s: str) -> int:
+        s = s.lower().strip()
+        return ord(s[0])

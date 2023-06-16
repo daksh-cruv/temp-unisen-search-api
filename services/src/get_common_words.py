@@ -15,7 +15,7 @@ class GetCommonWords:
     """
 
     def get_common_words(self) -> list:
-        files = sys.argv[1:]  # Retrieve command line arguments excluding the script name
+        files = sys.argv[1:]
         schools = []
         for file in files:
             df = pd.read_csv(file)
@@ -37,9 +37,8 @@ class GetCommonWords:
 
 
 
-# Create an instance of the class with multiple file names
-common_words = GetCommonWords()
-
-# Call the method to get the common words list
-words_list = common_words.get_common_words()
-print(words_list)
+# # Create an instance of the class with multiple file names
+# common_words = GetCommonWords()
+# # Call the method to get the common words list
+# words_list = common_words.get_common_words()
+# print(words_list)

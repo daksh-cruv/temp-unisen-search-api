@@ -11,12 +11,16 @@ curriculum_queryset = Curriculum.objects.all()
 curriculum_list = list(curriculum_queryset.values_list("abbreviation", flat=True))
 
 
-school_search = search_engine.SearchEngine(School.objects.select_related('curriculum'), "school", curriculum_list)
+school_search = search_engine.SearchEngine(School.objects.select_related('curriculum'),
+                                           "school", curriculum_list)
 college_search = search_engine.SearchEngine(College.objects.all(), "college")
-subject_search = search_engine.SearchEngine(Subject.objects.select_related('curriculum'), "subject", curriculum_list)
+subject_search = search_engine.SearchEngine(Subject.objects.select_related('curriculum'),
+                                            "subject", curriculum_list)
 major_search = search_engine.SearchEngine(Major.objects.all(), "major")
-subject_recommendation = SubjectRecommendationSystem(curriculum_list, Subject.objects.select_related('curriculum'))
-major_recommendation = MajorRecommendationSystem(Degree.objects.all(), Major.objects.all())
+subject_recommendation = SubjectRecommendationSystem(curriculum_list,
+                                                     Subject.objects.select_related('curriculum'))
+major_recommendation = MajorRecommendationSystem(Degree.objects.all(),
+                                                 Major.objects.all())
 
 
 class SchoolAPIView(views.APIView):
@@ -211,13 +215,15 @@ class SubjectRecommendationAPIView(views.APIView):
         curriculum = serializer.validated_data.get('curriculum')
         education_level = serializer.validated_data.get('education_level')
         recommendations = subject_recommendation.recomm_logic(
-                                                    query.split(", ") if query else [],
-                                                    curriculum,
+                                                    [subject.title() 
+                                                     for subject in query.split(", ")] 
+                                                     if query else [],
+                                                    curriculum.upper(),
                                                     education_level
                                                     )
         serializer.save()
         return Response(recommendations, status=status.HTTP_200_OK)
-    
+
 
 class DegreeAPIView(views.APIView):
     def __init__(self):

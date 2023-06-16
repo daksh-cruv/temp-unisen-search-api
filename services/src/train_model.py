@@ -50,17 +50,13 @@ class TrainModel:
     def update_pickle_values(self, data: set(), file_name: str):
 
         dataset_embeddings = self.loader.load_pkl(file_name)
-
-        # encode the new values
         for value in data:
             embedding = self.model.encode(value)
             dataset_embeddings[value] = embedding
-
         self.save_embeddings(dataset_embeddings, file_name)
 
 
     def delete_extra_values(self, data: set(), file_name: str):
-        
         dataset_embeddings = self.loader.load_pkl(file_name)
         for value in data:
             del dataset_embeddings[value]

@@ -34,8 +34,8 @@ class CheckPickleExists():
             """
             This function generates name of the pkl file based on the dataset.
             If the dataset is "college", then the pkl file name will be "college_embeddings.pkl"
-            if the dataset is "school" and the options are "cbse", "icse", then the pkl file names will be
-            "school_cbse_embeddings.pkl", "school_icse_embeddings.pkl".
+            if the dataset is "school" and the options are "cbse", "icse", then the pkl
+            file names will be "school_cbse_embeddings.pkl", "school_icse_embeddings.pkl".
             """
 
             if not options:
@@ -144,11 +144,11 @@ class CheckPickleExists():
     def check_pickle_updated(self, df: pd.DataFrame, pkl_path: str) -> None:
 
         """
-        First create a set of the concat column values in df,
-        then create a set of the keys in pkl file.
-        Then perform set arithmetic to check if the values in df are in pkl file or not.
-        if the values in df are not in pkl file, then encode the new values and update the pkl file
-        if there are more values in pkl file than in df, then delete the extra values from pkl file
+        First create a set of the concat column values in df, then create a set of the
+        keys in pkl file. Perform set arithmetic to check if the values in df are
+        in pkl file or not. If the values in df are not in pkl file, then encode the new
+        values and update the pkl file. if there are more values in pkl file than in df,
+        then delete the extra values from pkl file.
         """
 
         pkl_data = self.loader.load_pkl(file_name=pkl_path)

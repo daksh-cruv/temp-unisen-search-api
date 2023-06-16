@@ -9,21 +9,22 @@ class MajorRecommendationSystem:
 
     """
     This class is used to generate the mapping between degrees and majors.
-    The degrees and majors are encoded using sentence transformer and then cosine similarity is used
-    to find the most similar majors for each degree.
-    The mapping is created in the form of a dictionary, where the key is the degree name and the value
-    is a list of the top 3 most similar majors.
-    The dict is further saved as a pkl file.
+    Cosine similarity is used to find the most similar majors for each degree.
+    The mapping is created in the form of a dictionary, where the key is the degree name
+    and the value is a list of the top 3 most similar majors.
     """
 
     def __init__(self, degrees_queryset, majors_queryset):
         self.train_model = TrainModel()
         self.loader = DataLoader()
-        self.degrees_df = pd.DataFrame(list(degrees_queryset.values_list("name", flat=True)), columns=["degree_name"])
-        self.majors_df = pd.DataFrame(list(majors_queryset.values_list("name", flat=True)), columns=["major_name"])
+        self.degrees_df = pd.DataFrame(list(degrees_queryset.values_list("name", flat=True)),
+                                       columns=["degree_name"])
+        self.majors_df = pd.DataFrame(list(majors_queryset.values_list("name", flat=True)),
+                                      columns=["major_name"])
         self.preprocess_data()
         self.generate_mapping_if_not_exists()
         self.check_if_data_updated()
+
         # self.save_mapping_to_csv(r"services\data\cache\major_recommendations.csv")
         self.csv_mappings = self.create_mapping_from_csv(r"services\data\cache\major_recommendations.csv")
         print("\nInitiated Major Recommendation System\n")
@@ -32,7 +33,8 @@ class MajorRecommendationSystem:
     def generate_mapping_if_not_exists(self):
 
         """
-        This function checks if the mapping exists. If it does not exist, then it generates the mapping.
+        This function checks if the mapping exists. If it does not exist, 
+        then it generates the mapping.
         """
 
         try:
@@ -61,7 +63,7 @@ class MajorRecommendationSystem:
                                      columns=self.majors_df['major_name'],
                                      index=self.degrees_df['degree_name']
                                      )
-        similarity_df = similarity_df.apply(lambda x: x.sort_values(ascending=False).index.tolist(), axis=1)
+        similarity_df = similarity_df.apply(lambda x: x.sort_values(ascending=False).index.tolist(),axis=1)
         top_3_majors = similarity_df.apply(lambda x: x[:3])
         top_3_majors_dict = top_3_majors.to_dict()
 
