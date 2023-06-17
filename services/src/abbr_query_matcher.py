@@ -52,9 +52,9 @@ class AbbrQueryMatcher:
                           or len(word) > SearchConstants.abbr_char_limit]
 
             """
-            If the query_list_copy is still bigger than length 1, it means there are more
+            If filtered_words list is still bigger than length 1, it means there are more
             than 1 word that are not in common_words_set or smaller than 4 chars. So we
-            assume that the first word is the institute name and assign it to query_list_copy
+            assume that the first word is the institute name and assign it to filtered_words
             and the rest is the place. Also, we have not appended the full_words list to
             the place variable in "if" block. This is because we use it to form the
             address regex pattern later in the code anyway.
