@@ -64,6 +64,9 @@ class SubjectRecommendationSystem:
         Arguments: input_subjects list.
         Returns: Subject recommendations"""
 
+        curriculum = curriculum.upper()
+        education_level = education_level.lower()
+
         if len(input_subjects) == 0:
             data = self.filter_logic_combinations(curriculum, education_level)
             recommendations = self.get_initial_recommendations(data)

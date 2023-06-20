@@ -3,7 +3,7 @@ from rest_framework import serializers
 
 
 class SchoolQuerySerializer(serializers.ModelSerializer):
-	query = serializers.CharField(max_length=100, allow_blank=True, required=False)
+	query = serializers.CharField(max_length=100)
 	curriculum = serializers.CharField(max_length=10)
 
 	class Meta:

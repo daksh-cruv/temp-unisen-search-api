@@ -10,9 +10,7 @@ from drf_yasg import openapi
 from rest_framework import viewsets
 
 
-curriculum_queryset = Curriculum.objects.all()
-curriculum_list = list(curriculum_queryset.values_list("abbreviation", flat=True))
-
+curriculum_list = list(Curriculum.objects.values_list("abbreviation", flat=True))
 
 school_search = search_engine.SearchEngine(School.objects.select_related('curriculum'),
                                            "school", curriculum_list)
@@ -72,7 +70,7 @@ class SchoolViewSet(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         query = serializer.validated_data.get('query')
         curriculum = serializer.validated_data.get('curriculum')
-        results = school_search.search(query, {'curriculum__abbreviation': curriculum.upper()})
+        results = school_search.search(query, {'curriculum__abbreviation': curriculum})
         serializer.save()
         return Response(results, status=status.HTTP_200_OK)
 
@@ -155,8 +153,8 @@ class SubjectViewSet(viewsets.ViewSet):
         curriculum = serializer.validated_data.get('curriculum')
         education_level = serializer.validated_data.get('education_level')
         results = subject_search.search(query,
-                                        {'curriculum__abbreviation': curriculum.upper(),
-                                         'education_level': education_level.lower()
+                                        {'curriculum__abbreviation': curriculum,
+                                         'education_level': education_level
                                          },
                                         subject=True)
         serializer.save()
@@ -362,7 +360,7 @@ class SubjectRecommendationViewSet(viewsets.ViewSet):
         education_level = serializer.validated_data.get('education_level')
         recommendations = subject_recommendation.recomm_logic(
             [subject.title() for subject in query.split(", ")] if query else [],
-            curriculum.upper(),
+            curriculum,
             education_level
         )
         serializer.save()

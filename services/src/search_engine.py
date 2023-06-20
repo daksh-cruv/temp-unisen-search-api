@@ -72,8 +72,13 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
                query: str,
                filter_dict: dict = None,
                subject: bool = False) -> list:
-        
+
         if filter_dict:
+            if "curriculum__abbreviation" in filter_dict.keys():
+                filter_dict["curriculum__abbreviation"] = filter_dict["curriculum__abbreviation"].upper()
+            if "education_level" in filter_dict.keys():
+                filter_dict["education_level"] = filter_dict["education_level"].lower()
+
             embeddings = self.select_dataset(
                 option=filter_dict["curriculum__abbreviation"].lower()
                 )
@@ -82,7 +87,6 @@ class SearchEngine(AbbrQueryMatcher, FuzzyQueryMatcher):
             filtered_df = self.df
             embeddings = self.select_dataset()
         
-
         if subject:
             return self.subject_search(
                 query=query,
