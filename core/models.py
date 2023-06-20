@@ -91,7 +91,7 @@ class College(models.Model):
     This model is used to store the different colleges in the database.
     Attributes:
         name (str): The full name of the college.
-        address (str): The address of the college.
+        country (str): The address of the college.
     """
     class Meta:
         verbose_name_plural = "College Data"

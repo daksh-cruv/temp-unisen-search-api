@@ -29,7 +29,6 @@ class CollegeQuerySerializer(serializers.ModelSerializer):
 		model = models.SearchQuery
 		fields = (
 			'query',
-			'curriculum'
 		)
 
 
@@ -50,7 +49,6 @@ class SchoolDataSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = models.School
 		fields = (
-			'pk',
 			'name',
 			'address',
 			'curriculum',

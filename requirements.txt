@@ -15,3 +15,4 @@ jaro-winkler
 sentence-transformers
 fuzzywuzzy
 python-Levenshtein
+drf-yasg
