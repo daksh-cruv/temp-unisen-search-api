@@ -10,12 +10,11 @@ class AbbrQueryMatcher:
         self.common_words_set = {'sec', 'st', 'sr', 'the', 'of', 'new', 'no'}
 
 
-    def filter_df_by_first_char(self, query: str, df: pd.DataFrame) -> pd.DataFrame:
+    def filter_by_first_char(self, query: str, df: pd.DataFrame) -> pd.DataFrame:
         """
         This function filters the dataframe by the first character of the query.
         """
-        query_first_char_ascii = ord(query[0])
-        df = df[df["name_first_letter_ascii"] == query_first_char_ascii]
+        df = df[df["name_first_letter_ascii"] == ord(query[0])]
         return df
 
 
