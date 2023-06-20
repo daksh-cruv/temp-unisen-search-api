@@ -27,7 +27,7 @@ class AbbrQueryMatcher:
         and then further narrows down the matches by matching school addresses.
         """
 
-        df = self.filter_df_by_first_char(query, df)
+        df = self.filter_by_first_char(query, df)
         query_words_list = query.split(" ")
         selected_items = []
         full_or_common_words = []

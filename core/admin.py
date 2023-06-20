@@ -19,7 +19,7 @@ class CurriculumDataAdmin(admin.ModelAdmin):
 
 @admin.register(core_models.Subject)
 class SubjectDataAdmin(admin.ModelAdmin):
-    list_display = ('name', 'curriculum', 'education_level', 'alias','id')
+    list_display = ('name', 'curriculum', 'education_level', 'alias', 'id')
 
 
 @admin.register(core_models.College)
@@ -39,4 +39,4 @@ class MajorCategoryDataAdmin(admin.ModelAdmin):
 
 @admin.register(core_models.Degree)
 class DegreeDataAdmin(admin.ModelAdmin):
-    list_display = ('name', 'education_level','id')
+    list_display = ('name', 'education_level', 'id')
