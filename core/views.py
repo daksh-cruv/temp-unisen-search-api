@@ -1,23 +1,28 @@
-from .serializers import *
-from rest_framework import views, status
-from rest_framework.response import Response
-from services.src import search_engine
-from core.models import *
-from services.subject_recommendation.subject_recommendation_system import SubjectRecommendationSystem
-from services.src.major_recommendation_system import MajorRecommendationSystem
-from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-from rest_framework import viewsets
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status, viewsets
+from rest_framework.response import Response
+
+from core.models import *
+from services import SearchEngine
+from services.recommendation import (
+    MajorRecommendationSystem,
+    SubjectRecommendationSystem,
+)
+
+from .serializers import *
 
 
 curriculum_list = list(Curriculum.objects.values_list("abbreviation", flat=True))
 
-school_search = search_engine.SearchEngine(School.objects.select_related('curriculum'),
+school_search = SearchEngine(School.objects.select_related('curriculum'),
                                            "school", curriculum_list)
-college_search = search_engine.SearchEngine(College.objects.all(), "college")
-subject_search = search_engine.SearchEngine(Subject.objects.select_related('curriculum'),
+college_search = SearchEngine(College.objects.all(), "college")
+
+subject_search = SearchEngine(Subject.objects.select_related('curriculum'),
                                             "subject", curriculum_list)
-major_search = search_engine.SearchEngine(Major.objects.all(), "major")
+major_search = SearchEngine(Major.objects.all(), "major")
+
 subject_recommendation = SubjectRecommendationSystem(curriculum_list,
                                                      Subject.objects.select_related('curriculum'))
 major_recommendation = MajorRecommendationSystem(Degree.objects.all(),
