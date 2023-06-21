@@ -1,0 +1,91 @@
+Physics, Chemistry, Mathematics, Biology, Computer Science, English
+Physics, Chemistry, Mathematics, Biology, Computer Science, Economics
+Physics, Chemistry, Mathematics, Biology, Computer Science, Psychology
+Physics, Chemistry, Mathematics, Biology, Computer Science, Fine Arts
+Physics, Chemistry, Mathematics, Biology, Computer Science, History
+Physics, Chemistry, Mathematics, Biology, Computer Science, Geography
+Physics, Chemistry, Mathematics, Biology, Computer Science, Physical Education
+Physics, Chemistry, Mathematics, Biology, Computer Science, Music
+Physics, Chemistry, Mathematics, Biology, Computer Science, Biotechnology
+Physics, Chemistry, Mathematics, Biology, Computer Science, Statistics
+Physics, Chemistry, Mathematics, Biology, Computer Science, Informatics Practices
+Physics, Chemistry, Mathematics, Biology, Computer Science, Political Science
+Physics, Chemistry, Mathematics, Biology, Computer Science, Sociology
+Physics, Chemistry, Mathematics, Biology, Computer Science, Home Science
+Physics, Chemistry, Mathematics, Biology, Computer Science, Philosophy
+Physics, Chemistry, Mathematics, Biology, Computer Science, Physical Education
+Physics, Chemistry, Mathematics, Biology, Computer Science, Environmental Science
+Physics, Chemistry, Mathematics, Biology, Computer Science, Entrepreneurship
+Physics, Chemistry, Mathematics, Biology, Computer Science, Fashion Studies
+Physics, Chemistry, Mathematics, Biology, Computer Science, Multimedia and Web Technology
+Physics, Chemistry, Mathematics, Biology, Computer Science, Entrepreneurship
+Physics, Chemistry, Mathematics, Biology, Computer Science, Legal Studies
+Physics, Chemistry, Mathematics, Biology, Computer Science, Multimedia and Web Technology
+Physics, Chemistry, Mathematics, Biology, Computer Science, Food Production
+Physics, Chemistry, Mathematics, Biology, Computer Science, Fashion Studies
+Physics, Chemistry, Mathematics, Biology, Computer Science, Legal Studies
+Physics, Chemistry, Mathematics, Biology, Computer Science, Multimedia and Web Technology
+Physics, Chemistry, Mathematics, Biology, Computer Science, Food Production
+Physics, Chemistry, Mathematics, Biology, Computer Science, Fashion Studies
+Physics, Chemistry, Mathematics, Biology, Computer Science, Legal Studies
+Physics, Chemistry, Mathematics, Biology, Computer Science, Multimedia and Web Technology
+Physics, Chemistry, Mathematics, Biology, Computer Science, Food Production
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, English
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Physical Education
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Informatics Practices
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Statistics
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Entrepreneurship
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Fine Arts
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Music
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Geography
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Political Science
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Sociology
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Legal Studies
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Psychology
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Multimedia and Web Technology
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Fashion Studies
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Food Production
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Legal Studies
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Multimedia and Web Technology
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Food Production
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Legal Studies
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Multimedia and Web Technology
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Food Production
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Legal Studies
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Multimedia and Web Technology
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Food Production
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Legal Studies
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Multimedia and Web Technology
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Food Production
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Legal Studies
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Multimedia and Web Technology
+Business Studies, Accountancy, Economics, Mathematics, Computer Science, Food Production
+History, Political Science, Sociology, Economics, Psychology, English
+History, Political Science, Sociology, Economics, Psychology, Fine Arts
+History, Political Science, Sociology, Economics, Psychology, Physical Education
+History, Political Science, Sociology, Economics, Psychology, Music
+History, Political Science, Sociology, Economics, Psychology, Home Science
+History, Political Science, Sociology, Economics, Psychology, Mathematics
+History, Political Science, Sociology, Economics, Psychology, Geography
+History, Political Science, Sociology, Economics, Psychology, Philosophy
+History, Political Science, Sociology, Economics, Psychology, Legal Studies
+History, Political Science, Sociology, Economics, Psychology, Fashion Studies
+History, Political Science, Sociology, Economics, Psychology, Environmental Science
+History, Political Science, Sociology, Economics, Psychology, Multimedia and Web Technology
+History, Political Science, Sociology, Economics, Psychology, Food Production
+History, Political Science, Sociology, Economics, Psychology, Legal Studies
+History, Political Science, Sociology, Economics, Psychology, Multimedia and Web Technology
+History, Political Science, Sociology, Economics, Psychology, Food Production
+History, Political Science, Sociology, Economics, Psychology, Legal Studies
+History, Political Science, Sociology, Economics, Psychology, Multimedia and Web Technology
+History, Political Science, Sociology, Economics, Psychology, Food Production
+History, Political Science, Sociology, Economics, Psychology, Legal Studies
+History, Political Science, Sociology, Economics, Psychology, Multimedia and Web Technology
+History, Political Science, Sociology, Economics, Psychology, Food Production
+History, Political Science, Sociology, Economics, Psychology, Legal Studies
+History, Political Science, Sociology, Economics, Psychology, Multimedia and Web Technology
+History, Political Science, Sociology, Economics, Psychology, Food Production
+History, Political Science, Sociology, Economics, Psychology, Legal Studies
+History, Political Science, Sociology, Economics, Psychology, Multimedia and Web Technology
+History, Political Science, Sociology, Economics, Psychology, Food Production
+History, Political Science, Sociology, Economics, Psychology, Legal Studies

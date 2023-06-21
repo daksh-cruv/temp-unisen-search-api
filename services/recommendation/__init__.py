@@ -1,0 +1,2 @@
+from services.recommendation.subject_recommendation_system import SubjectRecommendationSystem
+from services.recommendation.major_recommendation_system import MajorRecommendationSystem
